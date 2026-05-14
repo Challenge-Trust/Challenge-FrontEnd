@@ -101,6 +101,12 @@
   transition: border-color 0.2s, transform 0.2s;
 }
 
+.imagemLogo{
+  width: 25px; 
+  height: 40px;
+  position: start;
+}
+
 .qs-card:hover {
   border-color: #4a55f5;
   transform: translateY(-4px);
