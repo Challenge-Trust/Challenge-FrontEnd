@@ -17,20 +17,17 @@
 .qs-header {
   position: absolute;
   width: 420px;
-  height: 220px;
+  height: 200px;
   background: #16162a;
   border: 1px solid #2a2a45;
   border-radius: 24px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   text-align: center;
   cursor: pointer;
   z-index: 2;
-
   transition: all 0.8s ease;
 }
 
@@ -44,6 +41,7 @@
 .quem-somos.active .qs-header {
   left: 25%;
   transform: translateX(-50%);
+  height: 420px;
 }
 
 /* TEXTO */
@@ -69,18 +67,20 @@
 .qs-grid {
   position: absolute;
   right: 10%;
-
+  height: 650px;
   width: 420px;
-
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 22px;
-
   opacity: 0;
   transform: translateX(100px);
   pointer-events: none;
-
   transition: all 0.8s ease;
+  overflow-y: scroll ;
+  overflow-x: hidden;
+  scrollbar-color: pink;
+  scrollbar-width: thin;
+  
 }
 
 /* aparece smooth */
@@ -95,8 +95,8 @@
   border: 1px solid #2a2a45;
   border-radius: 14px;
   padding: 1.75rem 1.25rem 1.5rem;
-  width: 100%;
-  max-width: 200px;
+  width: 250px;
+  max-width: 300px;
   text-align: center;
   transition: border-color 0.2s, transform 0.2s;
 }
@@ -215,4 +215,9 @@
 
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
+}
+
+.descricao{
+  justify-content: start;
+  align-items: start;
 }
