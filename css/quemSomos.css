@@ -193,6 +193,22 @@
   letter-spacing: 0.04em;
 }
 
+/* tamanho do logo do git */
+
+.gitLogo{
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  justify-content: center
+}
+
+.linkedinLogo{
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  justify-content: center
+}
+
 @media (max-width: 600px) {
   .quem-somos {
     padding: 60px 20px;
