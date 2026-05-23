@@ -1,0 +1,61 @@
+h1{
+    color: #4a55f5;
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.descricao{
+    color: #4a55f5;
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h3{
+    font-size: 64px;
+}
+.container-creditos{
+    display: flex;
+    padding: 100px;
+    gap: 150px;
+    justify-content: center;
+    align-items: center;
+}
+
+.creditos-pontos,
+.creditos-reais{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 200px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+#inputCreditos{
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: white;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+
+    caret-color: white;
+}
+
+/* remove fundo azul quando seleciona */
+#inputCreditos:focus{
+    outline: none;
+    border: none;
+    box-shadow: none;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trust</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/contato.css">
+</head>
+<body>
+
+  <!-- ════════════════ NAVEGAÇÃO ════════════════ -->
+  <nav>
+    <a href="#" class="logo">Trust<span>Corp.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html" id="nav-home">Inicio</a></li>
+      <li><a href="sobre.html" id="nav-about">Sobre</a></li>
+      <li><a href="quem_somos.html" id="nav-team">Quem Somos</a></li>
+      <li><a href="faq.html" id="nav-faq">FAQ</a></li>
+      <li><a href="contato.html" class="active" id="nav-contact">Contato</a></li>
+      <li><a href="conversao.html" id="nav-conversor">Converter Créditos</a></li>
+    </ul>
+  </nav>
+
+  <!-- ════════════════ CONTATO ════════════════ -->
+  <section class="contato">
+
+    <!-- Coluna esquerda -->
+    <div class="contato-info">
+      <span class="contato-label">Entre em Contato</span>
+      <h1>Fale com<br>a equipe</h1>
+      <p class="contato-desc">
+        Tem alguma dúvida, sugestão ou quer saber mais
+        sobre o projeto? Preencha o formulário ou use um dos
+        canais abaixo.
+      </p>
+
+      <ul class="contato-canais">
+        <li>
+          <span class="canal-icon">✉</span>
+          <span>contato@email.com</span>
+        </li>
+        
+        <li>
+          <span class="canal-icon">📍</span>
+          <span>FIAP — Av. Paulista, 1106 - São Paulo, SP</span>
+        </li>
+
+        <li>
+          <span class="canal-icon">🏫</span>
+          <span>Turma 1TDSPI · 2026</span>
+        </li>
+      </ul>
+
+      <div class="contato-projeto">
+        <span class="projeto-label">Projeto desenvolvido para</span>
+        <p class="projeto-nome">FIAP · Challenge Soul Up</p>
+        <span class="projeto-curso">Análise e Desenvolvimento de Sistemas</span>
+      </div>
+    </div>
+
+    <!-- Coluna direita: formulário -->
+    <div class="contato-form-wrapper">
+
+    <form id="formulario">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nome">
+                    Nome <span class="obrigatorio">*</span>
+                </label>
+                <input type="text" id="nome" placeholder="Seu nome" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="email">
+                    E-mail <span class="obrigatorio">*</span>
+                </label>
+                <input type="email" id="email" placeholder="seu@email.com" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="assunto">Assunto</label>
+            <select id="assunto">
+                <option value="" disabled selected>
+                    Selecione um assunto
+                </option>
+                <option value="duvida">Dúvida sobre o projeto</option>
+                <option value="sugestao">Sugestão</option>
+                <option value="parceria">Parceria</option>
+                <option value="outro">Outro</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="mensagem">
+                Mensagem <span class="obrigatorio">*</span>
+            </label>
+
+            <textarea
+                id="mensagem"
+                rows="6"
+                placeholder="Descreva sua mensagem aqui…"
+            ></textarea>
+        </div>
+
+        <button class="btn-enviar" type="submit">
+            Enviar Mensagem →
+        </button>
+    </form>
+</div>
+
+
+<!-- MODAL -->
+<dialog id="modalMensagemEnviada">
+    <div class="modal-content">
+        <h2>Mensagem enviada com sucesso!</h2>
+
+        <p>
+            Você receberá um retorno por email em até
+            <strong>72 horas.</strong>
+        </p>
+
+        <form method="dialog">
+            <button class="modal-btn">
+                Concluir
+            </button>
+        </form>
+    </div>
+</dialog>
+</section>
+
+  <!-- ════════════════ FOOTER ════════════════ -->
+  <footer class="footer">
+    <p>© 2026 SoulUp · Projeto acadêmico FIAP · Todos os direitos reservados ao grupo</p>
+  </footer>
+
+<script src="../javaScript/contato.js"></script>
+</body>
+</html>

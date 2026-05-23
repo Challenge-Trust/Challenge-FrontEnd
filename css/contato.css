@@ -1,0 +1,282 @@
+/* ══════════════════════════════════════
+   CONTATO — PÁGINA
+══════════════════════════════════════ */
+
+/* ── Layout principal: duas colunas ── */
+.contato {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  align-items: start;
+}
+
+/* ══ COLUNA ESQUERDA ══ */
+
+.contato-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #4a55f5;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.contato-info h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #e8e8ff;
+  line-height: 1.1;
+  margin-bottom: 1.1rem;
+}
+
+.contato-desc {
+  font-size: 0.9rem;
+  color: #7777aa;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+  max-width: 360px;
+}
+
+/* Lista de canais */
+.contato-canais {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.contato-canais li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: #a0a0c8;
+  line-height: 1.45;
+}
+
+.canal-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Card "Projeto desenvolvido para" */
+.contato-projeto {
+  background-color: #12121f;
+  border: 1px solid #1e1e38;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  display: inline-block;
+  max-width: 320px;
+}
+
+.projeto-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #7777aa;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.projeto-nome {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #4a55f5;
+  margin: 0 0 0.3rem;
+}
+
+.projeto-curso {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5555aa;
+}
+
+/* ══ COLUNA DIREITA: FORMULÁRIO ══ */
+
+.contato-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Linha com dois campos lado a lado */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Grupo label + input */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #a0a0c8;
+  letter-spacing: 0.02em;
+}
+
+.obrigatorio {
+  color: #4a55f5;
+}
+
+/* Inputs, select e textarea */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background-color: #12121f;
+  border: 1px solid #1e1e38;
+  border-radius: 10px;
+  color: #e8e8ff;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Seta customizada no select */
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237777aa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-group select option {
+  background-color: #12121f;
+  color: #e8e8ff;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #3a3a5c;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #4a55f5;
+  box-shadow: 0 0 0 3px rgba(74, 85, 245, 0.15);
+}
+
+/* Botão enviar */
+.btn-enviar {
+  background-color: #4a55f5;
+  color: #fff;
+  margin-top: 30px;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.btn-enviar:hover {
+  background-color: #3a44e0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(74, 85, 245, 0.35);
+}
+
+.btn-enviar:active {
+  transform: translateY(0);
+}
+
+
+/* ══ RESPONSIVO ══ */
+@media (max-width: 768px) {
+  .contato {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 60px 20px;
+  }
+
+  .contato-info h1 {
+    font-size: 2.2rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+#modalMensagemEnviada {
+    border: none;
+    padding: 0;
+    background: transparent;
+
+    position: fixed;
+    inset: 0;
+    margin: auto;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+#modalMensagemEnviada::backdrop {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+}
+
+.modal-content {
+    background: #0f1025;
+    border: 1px solid rgba(110, 86, 255, 0.2);
+    border-radius: 24px;
+    padding: 40px;
+    width: 450px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 40px rgba(88, 76, 255, 0.2);
+}
+
+.modal-content h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.modal-content p {
+    color: #a5a7c5;
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+.modal-btn {
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    background: #5a5cff;
+    color: white;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+}

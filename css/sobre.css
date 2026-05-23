@@ -1,0 +1,140 @@
+.sobre-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    padding: 120px 40px 60px;
+}
+
+/* ESQUERDA */
+.sobre-left {
+    flex: 1;
+    min-width: 700px;
+
+    background: #16162a;
+    border: 1px solid #2a2a45;
+    border-radius: 30px;
+    padding: 70px;
+}
+
+.sobre-label {
+    display: block;
+    color: #4a55f5;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    margin-bottom: 20px;
+}
+
+.sobre-left h1 {
+    color: #e8e8ff;
+    font-size: 4rem;
+    line-height: 1.15;
+    margin-bottom: 30px;
+
+    max-width: 650px;
+}
+
+.sobre-text {
+    color: #a3a7d6;
+    line-height: 1.9;
+    font-size: 1.05rem;
+    margin-bottom: 22px;
+    max-width: 700px;
+}
+
+/* CARDS DIREITA */
+.sobre-right {
+    width: 360px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.sobre-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 35px;
+}
+
+.stat-card {
+    background: #1a1a33;
+    border: 1px solid #2a2a45;
+    border-radius: 18px;
+
+    padding: 18px 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    transition: .25s ease;
+}
+
+.stat-card:hover {
+    border-color: #4a55f5;
+
+    box-shadow:
+        0 0 20px rgba(74,85,245,.10);
+}
+
+.stat-icon {
+    font-size: 1.8rem;
+}
+
+.stat-card span:last-child {
+    color: #e8e8ff;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.sobre-card {
+    background: #16162a;
+    border: 1px solid #2a2a45;
+    border-radius: 24px;
+
+    padding: 30px;
+    transition: .25s ease;
+}
+
+.sobre-card:hover {
+    transform: translateY(-4px);
+    border-color: #4a55f5;
+
+    box-shadow:
+        0 0 20px rgba(74,85,245,.12),
+        0 0 50px rgba(74,85,245,.08);
+}
+
+.sobre-card h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+}
+
+.sobre-card p {
+    color: #a3a7d6;
+    line-height: 1.8;
+}
+
+/* RESPONSIVO */
+@media(max-width: 1000px) {
+    .sobre-container {
+        flex-direction: column;
+    }
+
+    .sobre-right {
+        width: 100%;
+    }
+
+    .sobre-left {
+        padding: 50px 35px;
+    }
+
+    .sobre-left h1 {
+        font-size: 2.8rem;
+    }
+}
