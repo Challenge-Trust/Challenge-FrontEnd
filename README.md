@@ -33,9 +33,10 @@ O SoulUp une entretenimento, aprendizado e impacto social, criando uma experiên
 ## 🛠 Tecnologias Utilizadas
 
 ### Front-End (este repositório)
-- HTML5
+- React
+- Vite
+- TypeScript
 - CSS3
-- JavaScript (Vanilla)
 
 ### Back-End *(em desenvolvimento)*
 - Java
@@ -52,26 +53,24 @@ O SoulUp une entretenimento, aprendizado e impacto social, criando uma experiên
 ```
 Challenge-FrontEnd/
 │
-├── index.html              # Página inicial
-├── css/
-│   ├── styles.css          # Estilos globais
-│   └── quemSomos.css       # Estilos da página Quem Somos
-├── pages/
-│   ├── sobre.html          # Página Sobre
-│   ├── quem_somos.html     # Página Quem Somos
-│   ├── faq.html            # Página FAQ
-│   ├── contato.html        # Página de Contato
-│   └── conversao.html      # Página Converter Créditos
-├── javaScript/
-│   └── quemSomos.js        # Scripts da página Quem Somos
-└── img/                    # Imagens e assets
+├── index.html              # Entrada do Vite
+├── src/
+│   ├── components/         # Componentes compartilhados
+│   ├── pages/              # Páginas React
+│   ├── App.tsx             # Rotas da aplicação
+│   └── main.tsx            # Entrada React
+├── public/
+│   ├── css/                # Estilos originais
+│   └── img/                # Imagens e assets
+├── package.json
+└── vite.config.ts
 ```
 
 ---
 
 ## ▶️ Como Executar
 
-Este projeto é um site estático — nenhuma instalação é necessária.
+Este projeto utiliza React, Vite e TypeScript.
 
 Link Repositório:
 https://github.com/Challenge-Trust/Challenge-FrontEnd
@@ -86,9 +85,13 @@ git clone https://github.com/Challenge-Trust/Challenge-FrontEnd.git
 cd Challenge-FrontEnd
 ```
 
-3. Abra o arquivo `index.html` no seu navegador, ou use uma extensão como **Live Server** no VS Code para uma melhor experiência de desenvolvimento.
+3. Instale as dependências e inicie o servidor de desenvolvimento:
+```bash
+npm install
+npm run dev
+```
 
-> **Dica:** No VS Code, clique com o botão direito no `index.html` e selecione *"Open with Live Server"*.
+4. Abra o endereço exibido pelo Vite no navegador.
 
 ---
 

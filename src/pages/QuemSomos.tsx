@@ -1,0 +1,14 @@
+import { useState } from 'react'
+
+const members = [
+  { name: 'Nicolas Martins', role: '-Desenvolvedor de Java-', photo: 'nicolas.jpeg', linkedin: 'https://www.linkedin.com/in/nicolas-rodrigues-martins-126607360?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app', github: 'https://github.com/NickRM22', tech: 'JAVALOGO-removebg-preview.png', techAlt: 'Logo Java', techClass: 'imagemLogo1', rm: 'RM 573178' },
+  { name: 'Henrique Soares', role: '- Desenvolvedor do DataBase-', photo: 'henrique.jpeg', linkedin: 'https://www.linkedin.com/in/henrique-s-s-47419a3aa/', github: 'https://github.com/henriquesoaresserra-h', tech: 'LOGODATAMODELER-removebg-preview.png', techAlt: 'Logo DataBase', techClass: 'imagemLogo2', rm: 'RM 573618' },
+  { name: 'Vinicius Soares', role: '-Desenvolvedor dor front-', photo: 'vinicius.jpeg', linkedin: 'https://www.linkedin.com/in/vinícius-soares-loureiro-9bb96b34b?utm_source=share_via&utm_content=profile&utm_medium=member_ios', github: 'https://github.com/vinisl2510-sudo', tech: 'html-removebg-preview.png', techAlt: 'Logo HTML', techClass: 'imagemLogo3', rm: 'RM 573351' },
+  { name: 'Nicolas Frazão', role: '- Desenvolvedor de Agente Virtual-', photo: 'nicolas_frazao.jpeg', linkedin: 'https://www.linkedin.com/in/nicolas-molina-3a9257355?utm_source=share_via&utm_content=profile&utm_medium=member_ios', github: 'https://github.com/Frazaomol', tech: 'transferir-removebg-preview.png', techAlt: 'Logo IA', techClass: 'imagemLogo4', rm: 'RM 568780' },
+  { name: 'Cauã Bertini', role: '-Desenvolvedor de Python-', photo: 'caua.png', linkedin: 'https://www.linkedin.com/in/caua-mathias-bertini', github: 'https://github.com/cauabertini', tech: 'PYTHONLOGO-removebg-preview.png', techAlt: 'Logo Python', techClass: 'imagemLogo5', rm: 'RM 570451' },
+]
+
+export default function QuemSomos() {
+  const [active, setActive] = useState(false)
+  return <section className={`quem-somos${active ? ' active' : ''}`} id="quemSomos"><div className="qs-header" id="qsHeader" onClick={() => setActive(value => !value)}><span className="qs-label">EQUIPE</span><h1>Quem Somos</h1><p>Clique e conheça os integrantes por trás da SoulUp!</p></div><div className="qs-grid" id="qsGrid">{members.map(member => <div className="qs-card" key={member.name}><div className="qs-foto"><img src={`/img/${member.photo}`} alt={`Foto de ${member.name}`} /></div><div className="qs-info"><h3>{member.name}</h3><p id="descricao"> {member.role}</p><p><a href={member.linkedin} target="_blank" rel="noreferrer"><img className="linkedinLogo" src="/img/linkedinLogo.png" alt="" /></a><a href={member.github} target="_blank" rel="noreferrer"><img src="/img/git hub logo.png" className="gitLogo" alt="" /></a></p><img className={member.techClass} src={`/img/${member.tech}`} alt={member.techAlt} /><span className="qs-rm">{member.rm}</span></div></div>)}</div></section>
+}
