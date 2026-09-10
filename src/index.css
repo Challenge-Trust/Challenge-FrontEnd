@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+:root {
+  --font-sans: 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+
+  --color-base: #0d0d1a;
+  --color-card: #16162a;
+  --color-cardalt: #15152a;
+  --color-cardborder: #2a2a45;
+  --color-cardborderalt: #29294b;
+  --color-navbg: #0d0d0d;
+
+  --color-brand: #4a55f5;
+  --color-brandhover: #3a44e0;
+
+  --color-heading: #e8e8ff;
+  --color-body: #e0e0f0;
+  --color-muted: #9999bb;
+  --color-faint: #7777aa;
+  --color-nav: #cccccc;
+}
+
+body {
+  background-color: var(--color-base);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  color: var(--color-body);
+  font-family: var(--font-sans);
+}

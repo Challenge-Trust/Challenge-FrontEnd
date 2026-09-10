@@ -99,7 +99,6 @@ npm run dev
 
 | Nome | Função | RM |
 |------|--------|----|
-| [Nicolas Martins](https://github.com/NickRM22) | Desenvolvedor Java | 573178 |
 | [Henrique Soares](https://github.com/henriquesoaresserra-h) | Desenvolvedor de DataBase | 573618 |
 | [Vinicius Soares](https://github.com/vinisl2510-sudo) | Desenvolvedor Front-End | 573351 |
 | [Nicolas Frazão](https://github.com/Frazaomol) | Desenvolvedor de Agente Virtual | 568780 |

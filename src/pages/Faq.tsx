@@ -1,21 +1,56 @@
-import { useState } from 'react'
-
-const faqs = [
-  ['O que é a Soul Up?', 'A Soul Up é a primeira rede social de impacto sustentável do planeta! Ela combina tecnologia blockchain, comunidades descentralizadas e recompensas com impacto real.'],
-  ['A Soul Up é gratuita?', 'Sim. A Soul Up é 100% gratuita! Basta apenas instalar, criar uma conta e começar a assistir vídeos para poder trocar pontos em créditos!'],
-  ['Preciso criar uma conta?', 'Sim. Para a conversão de pontos em créditos de transporte público é necessário realizar a criação de uma conta.'],
-  ['Minhas informações ficam seguras?', 'Sim. Prezamos pela privacidade dos usuários e buscamos utilizar boas práticas de segurança e proteção de dados.'],
-  ['Como posso entrar em contato com a equipe?', 'Você pode utilizar a página de contato do site e enviar uma mensagem diretamente para nossa equipe.'],
-  ['Quem desenvolveu a Soul Up?', 'A SoulUp foi desenvolvido por estudantes da FIAP como parte de um projeto acadêmico voltado à inovação e tecnologia.'],
-]
+import { useState } from 'react';
+import { faqItems } from '../data/faq';
 
 export default function Faq() {
-  const [active, setActive] = useState<Set<number>>(new Set())
-  const toggle = (index: number) => setActive(previous => {
-    const next = new Set(previous)
-    if (next.has(index)) next.delete(index)
-    else next.add(index)
-    return next
-  })
-  return <section className="faq-section"><div className="faq-layout"><div className="faq-header"><span className="faq-label">DÚVIDAS</span><h1>Perguntas Frequentes</h1><p>Tire suas dúvidas sobre o SoulUp.</p></div><div className="faq-container">{faqs.map(([question, answer], index) => <div className={`faq-item${active.has(index) ? ' active' : ''}`} key={question}><button className="faq-question" onClick={() => toggle(index)}>{question}</button><div className="faq-answer"><p>{answer}</p></div></div>)}</div></div></section>
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  const toggle = (id: string) => {
+    setOpenId((current) => (current === id ? null : id));
+  };
+
+  return (
+    <section className="mx-auto max-w-3xl px-6 py-16 sm:px-10">
+      <div className="mb-12 text-center">
+        <span className="text-xs font-semibold uppercase tracking-widest text-brand">
+          Dúvidas
+        </span>
+        <h1 className="my-3 text-3xl font-bold text-heading sm:text-4xl">
+          Perguntas Frequentes
+        </h1>
+        <p className="text-faint">Tire suas dúvidas sobre o SoulUp.</p>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        {faqItems.map((item) => {
+          const isOpen = openId === item.id;
+          return (
+            <div
+              key={item.id}
+              className="overflow-hidden rounded-2xl border border-cardborderalt bg-cardalt"
+            >
+              <button
+                type="button"
+                onClick={() => toggle(item.id)}
+                aria-expanded={isOpen}
+                className="w-full px-6 py-5 text-left text-lg text-white transition-colors hover:text-brand"
+              >
+                {item.question}
+              </button>
+              <div
+                className={`grid transition-all duration-300 ease-in-out ${
+                  isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <p className="px-6 pb-6 leading-relaxed text-[#b9b9d9]">
+                    {item.answer}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
 }
