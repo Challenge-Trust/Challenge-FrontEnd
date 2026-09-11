@@ -7,6 +7,7 @@ import QuemSomosDetalhe from '../pages/QuemSomosDetalhe';
 import Faq from '../pages/Faq';
 import Contato from '../pages/Contato';
 import Conversao from '../pages/Conversao';
+import NotFound from '../pages/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: 'faq', element: <Faq /> },
       { path: 'contato', element: <Contato /> },
       { path: 'conversao', element: <Conversao /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ]);

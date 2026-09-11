@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Button from '../components/Button';
 import Card from '../components/Card';
 
 const steps = [
@@ -39,36 +39,29 @@ export default function Home() {
     <>
       {/* HERO */}
       <section className="flex min-h-[70vh] items-center justify-center px-6 py-20 sm:px-10">
-        <div className="w-full max-w-2xl rounded-2xl border border-cardborder bg-card p-10 text-center sm:p-14">
+        <Card padding="large" className="w-full max-w-2xl text-center">
           <h1 className="mb-4 text-3xl font-bold leading-tight text-heading sm:text-4xl">
-            Seus pontos valem{' '}
-            <span className="text-brand">passagens reais</span>
+            Seus pontos valem <span className="text-accent">passagens reais</span>
           </h1>
           <p className="mb-8 leading-relaxed text-muted">
-            Converta pontos de fidelidade em passagens de transporte público.
-            Simples, rápido e sem burocracia.
+            Converta pontos de fidelidade em passagens de transporte público. Simples, rápido e sem
+            burocracia.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              to="/sobre"
-              className="rounded-lg bg-brand px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brandhover"
-            >
+            <Button to="/sobre" className="w-full sm:w-auto">
               Conhecer a solução →
-            </Link>
-            <Link
-              to="/contato"
-              className="rounded-lg border border-[#2a2a55] px-6 py-2.5 text-sm font-medium text-muted transition-colors hover:border-brand hover:text-white"
-            >
+            </Button>
+            <Button to="/contato" variant="secondary" className="w-full sm:w-auto">
               Fale conosco
-            </Link>
+            </Button>
           </div>
-        </div>
+        </Card>
       </section>
 
       {/* COMO FUNCIONA */}
       <section className="mx-auto max-w-4xl px-6 py-16 sm:px-10">
         <div className="mb-12 text-center">
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand">
+          <span className="text-xs font-semibold uppercase tracking-widest text-accent">
             Como funciona?
           </span>
           <h2 className="my-3 text-2xl font-bold leading-tight text-heading sm:text-3xl">
@@ -77,15 +70,15 @@ export default function Home() {
             em 3 etapas
           </h2>
           <p className="mx-auto max-w-md text-sm leading-relaxed text-faint">
-            Conectamos seu programa de pontos diretamente a rede de transporte
-            público da sua cidade.
+            Conectamos seu programa de pontos diretamente a rede de transporte público da sua
+            cidade.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((step) => (
             <Card key={step.number}>
-              <span className="mb-3 block text-3xl font-extrabold text-[#2a2a55]">
+              <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-brand/20 text-xl font-bold text-accent">
                 {step.number}
               </span>
               <h3 className="mb-2 font-semibold text-heading">{step.title}</h3>
@@ -97,18 +90,14 @@ export default function Home() {
 
       {/* FUNCIONALIDADES */}
       <section className="px-6 pb-20 sm:px-10">
-        <h2 className="mb-8 mt-4 text-center text-xs font-semibold uppercase tracking-widest text-brand">
+        <h2 className="mb-8 mt-4 text-center text-xs font-semibold uppercase tracking-widest text-accent">
           Funcionalidades
         </h2>
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
             <Card key={feature.title} hoverBrand>
-              <h3 className="mb-2 font-semibold text-heading">
-                {feature.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-faint">
-                {feature.text}
-              </p>
+              <h3 className="mb-2 font-semibold text-heading">{feature.title}</h3>
+              <p className="text-sm leading-relaxed text-faint">{feature.text}</p>
             </Card>
           ))}
         </div>

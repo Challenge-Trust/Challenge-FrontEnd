@@ -25,7 +25,7 @@ export default function Sobre() {
   return (
     <section className="mx-auto grid max-w-5xl grid-cols-1 gap-12 px-6 py-16 sm:px-10 lg:grid-cols-2">
       <div>
-        <span className="text-xs font-semibold uppercase tracking-widest text-brand">
+        <span className="text-xs font-semibold uppercase tracking-widest text-accent">
           Sobre a solução para Soul Up
         </span>
         <h1 className="my-4 text-2xl font-bold leading-snug text-heading sm:text-3xl">
@@ -33,18 +33,17 @@ export default function Sobre() {
         </h1>
 
         <p className="mb-4 leading-relaxed text-muted">
-          O SoulUp é uma rede social criada para incentivar o consumo de
-          conteúdos relevantes e educativos de forma recompensadora.
+          O SoulUp é uma rede social criada para incentivar o consumo de conteúdos relevantes e
+          educativos de forma recompensadora.
         </p>
         <p className="mb-4 leading-relaxed text-muted">
-          Na plataforma, os usuários assistem vídeos, acumulam pontos por
-          participação e podem trocar esses pontos por créditos para
-          transporte público, tornando o acesso à mobilidade mais acessível.
+          Na plataforma, os usuários assistem vídeos, acumulam pontos por participação e podem
+          trocar esses pontos por créditos para transporte público, tornando o acesso à mobilidade
+          mais acessível.
         </p>
         <p className="mb-8 leading-relaxed text-muted">
-          Nosso objetivo é unir entretenimento, aprendizado e impacto social,
-          criando uma experiência onde o tempo investido em conteúdo gera
-          benefícios reais no dia a dia.
+          Nosso objetivo é unir entretenimento, aprendizado e impacto social, criando uma
+          experiência onde o tempo investido em conteúdo gera benefícios reais no dia a dia.
         </p>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
