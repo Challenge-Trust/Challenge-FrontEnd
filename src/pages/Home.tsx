@@ -25,7 +25,7 @@ const features = [
     text: 'Gere vouchers com QR Code para uso imediato nas catracas e terminais parceiros.',
   },
   {
-    title: 'Integração com Bilhetagem',
+    title: 'Integração com bilhetagem',
     text: 'Crédito automático no seu cartão de transporte.',
   },
   {
