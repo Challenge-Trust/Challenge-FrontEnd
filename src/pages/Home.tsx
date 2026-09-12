@@ -21,7 +21,7 @@ const steps = [
 
 const features = [
   {
-    title: 'Vouchers Digitais',
+    title: 'Vouchers digitais',
     text: 'Gere vouchers com QR Code para uso imediato nas catracas e terminais parceiros.',
   },
   {
