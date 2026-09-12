@@ -4,7 +4,7 @@ import Card from '../components/Card';
 const steps = [
   {
     number: '1',
-    title: 'Acumule Pontos!',
+    title: 'Acumule pontos!',
     text: 'Use seu cartão fidelidade no dia a dia e acumule pontos em compras, serviços e parceiros.',
   },
   {
