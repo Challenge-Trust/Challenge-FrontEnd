@@ -4,7 +4,7 @@ import Card from '../components/Card';
 const steps = [
   {
     number: '1',
-    title: 'Acumule pontos!',
+    title: 'Acumule Pontos!',
     text: 'Use seu cartão fidelidade no dia a dia e acumule pontos em compras, serviços e parceiros.',
   },
   {
@@ -21,7 +21,7 @@ const steps = [
 
 const features = [
   {
-    title: 'Vouchers digitais',
+    title: 'Vouchers Digitais',
     text: 'Gere vouchers com QR Code para uso imediato nas catracas e terminais parceiros.',
   },
   {
