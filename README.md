@@ -168,4 +168,5 @@ Isso não configura proteção de branch nem publica o site automaticamente.
 
 ## 📄 Licença
 
-Projeto acadêmico desenvolvido para a **FIAP**. Todos os direitos reservados ao grupo TrustCorp.
+Projeto acadêmico desenvolvido para a **FIAP**(2026). Todos os direitos reservados ao grupo TrustCorp.
+
