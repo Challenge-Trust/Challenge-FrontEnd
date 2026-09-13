@@ -146,7 +146,7 @@ Isso não configura proteção de branch nem publica o site automaticamente.
 
 | Nome                                                        | Função                          | RM     |
 | ----------------------------------------------------------- | ------------------------------- | ------ |
-| [Henrique Soares](https://github.com/henriquesoaresserra-h) | Desenvolvedor de DataBase       | 573618 |
+| [Henrique Soares Soares](https://github.com/henriquesoaresserra-h) | Desenvolvedor de DataBase       | 573618 |
 | [Vinicius Soares](https://github.com/vinisl2510-sudo)       | Desenvolvedor Front-End         | 573351 |
 | [Nicolas Frazão](https://github.com/Frazaomol)              | Desenvolvedor de Agente Virtual | 568780 |
 | [Cauã Bertini](https://github.com/cauabertini)              | Desenvolvedor Python            | 570451 |
