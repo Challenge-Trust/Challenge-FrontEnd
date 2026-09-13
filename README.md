@@ -132,7 +132,7 @@ Use `npm run format` para aplicar a formatação padronizada.
 - Rotas: `/`, `/sobre`, `/quem-somos`, `/quem-somos/:id`, `/faq`, `/contato`, `/conversao` e fallback 404.
 
 Em hospedagem estática, configure o servidor de forma para servir `index.html` nas rotas da aplicação.
-O formulário ainda é uma demonstração local: valida dados e mostra um modal, mas não envia e-mails nem faz chamadas a um backend.
+O formulário ainda é uma demonstração local no qual valida dados e mostra um modal, mas não envia e-mails nem faz chamadas a um backend
 
 ### Colaboração e versionamento
 
