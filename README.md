@@ -155,9 +155,9 @@ Isso não configura proteção de branch nem publica o site automaticamente.
 
 ## 📌 Status do Projeto
 
-🚧 **Em desenvolvimento** — Projeto acadêmico FIAP
+🚧 **Em desenvolvimento** — Projeto acadêmico FIAP (2026)
 
-- [x] Site institucional (Front-End)
+- [x] Site institucional   (Front-End)
 - [ ] Back-End Java
 - [ ] Back-End Python
 - [ ] Integração com Banco de Dados
