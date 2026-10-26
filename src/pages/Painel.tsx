@@ -5,12 +5,13 @@ import Card from '../components/Card';
 import { useAuth } from '../hooks/useAuth';
 import { ApiError } from '../services/api';
 import { usuarioService } from '../services/usuarioService';
-import type { AsyncState, Co2Economia, Pontos, Ticket } from '../types';
+import type { AsyncState, Co2Economia, Pontos, Selo, Ticket } from '../types';
 
 interface DadosPainel {
   tickets: Ticket[];
   pontos: Pontos | null;
   co2: Co2Economia[];
+  selo: Selo;
 }
 
 const formatarData = (iso: string) =>
@@ -44,9 +45,10 @@ export default function Painel() {
       usuarioService.listarTickets(usuarioId, signal),
       pontosOuNulo(usuarioService.buscarPontos(usuarioId, signal)),
       usuarioService.listarCo2(usuarioId, signal),
+      usuarioService.buscarSelo(usuarioId, signal),
     ])
-      .then(([tickets, pontos, co2]) =>
-        setEstado({ status: 'success', data: { tickets, pontos, co2 } }),
+      .then(([tickets, pontos, co2, selo]) =>
+        setEstado({ status: 'success', data: { tickets, pontos, co2, selo } }),
       )
       .catch((error: unknown) => {
         if (error instanceof DOMException && error.name === 'AbortError') return;
@@ -116,11 +118,13 @@ function Resumo({ dados }: { dados: DadosPainel }) {
     { rotulo: 'Pontos', valor: formatarNumero(saldoPontos), unidade: 'pts' },
     { rotulo: 'Tickets', valor: formatarNumero(totalTickets), unidade: 'tickets' },
     { rotulo: 'CO₂ economizado', valor: formatarNumero(totalCo2), unidade: 'kg' },
+
+    { rotulo: 'Selo sustentável', valor: dados.selo.selo, unidade: '' },
   ];
 
   return (
     <>
-      <dl className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <dl className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {indicadores.map((item) => (
           <Card key={item.rotulo} padding="compact">
             <dt className="text-xs uppercase tracking-wide text-faint">{item.rotulo}</dt>

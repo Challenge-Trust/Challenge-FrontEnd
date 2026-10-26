@@ -98,6 +98,16 @@ export interface Co2Economia {
   dataCalculo: string;
 }
 
+/** Union type: selos possíveis conforme o CO₂ total economizado. */
+export type SeloSustentavel = 'Bronze' | 'Prata' | 'Ouro';
+
+/** GET /api/usuarios/{id}/selo (totalCo2Economizado em gramas). */
+export interface Selo {
+  usuarioId: number;
+  totalCo2Economizado: number;
+  selo: SeloSustentavel;
+}
+
 /** Estado genérico de dados vindos da API. */
 export type AsyncState<T> =
   | { status: 'idle' | 'loading' }
