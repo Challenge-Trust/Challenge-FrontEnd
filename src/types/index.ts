@@ -24,3 +24,79 @@ export interface ContactFormData {
   assunto: ContactSubject;
   mensagem: string;
 }
+
+/* ---------- Autenticação e API (espelham os models Java: Usuario, Ticket, Points, CO2Economia) ---------- */
+
+/** Usuario.java sem o campo password, que nunca deve voltar do back-end. */
+export interface Usuario {
+  id: number;
+  name: string;
+  userName?: string | null;
+  cpf: string;
+  viewMinutes: number;
+}
+
+/** Union type: todos os estados possíveis de uma requisição. */
+export type RequestStatus = 'idle' | 'loading' | 'success' | 'error';
+
+/** Intersection type: usuário autenticado + token opcional (caso o back-end emita um). */
+export type SessaoUsuario = Usuario & { token?: string };
+
+export interface LoginRequest {
+  cpf: string;
+  password: string;
+}
+
+export interface CadastroRequest {
+  cpf: string;
+  name: string;
+  password: string;
+  viewMinutes: number;
+}
+
+export interface RecuperarSenhaRequest {
+  cpf: string;
+  name: string;
+  newPassword: string;
+}
+
+export interface MensagemResponse {
+  message: string;
+}
+
+/** Ticket.java (tabela passagem). dataEmissao chega como ISO-8601. */
+export interface Ticket {
+  id: number;
+  usuarioId: number;
+  tickets: number;
+  dataEmissao: string;
+}
+
+/** Points.java (tabela pontos). */
+export interface Pontos {
+  id: number;
+  usuarioId: number;
+  points: number;
+  dataAtualizacao: string;
+}
+
+/** CO2Economia.java (tabela co2). */
+export interface Co2Economia {
+  id: number;
+  usuarioId: number;
+  distanciaKm: number;
+  co2Economizado: number;
+  passageiroOnibus: number;
+  dataCalculo: string;
+}
+
+/** Estado genérico de dados vindos da API. */
+export type AsyncState<T> =
+  | { status: 'idle' | 'loading' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; message: string };
+
+export interface LocationState {
+  from?: string;
+  aviso?: string;
+}

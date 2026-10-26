@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { navigation } from '../data/navigation';
+import { guestNavigation, navigation, userNavigation } from '../data/navigation';
+import { useAuth } from '../hooks/useAuth';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const toggle = useRef<HTMLButtonElement>(null);
   const { pathname } = useLocation();
+  const { autenticado, logout } = useAuth();
+  const links = [...navigation, ...(autenticado ? userNavigation : guestNavigation)];
 
   useEffect(() => {
     setOpen(false);
@@ -38,7 +41,7 @@ export default function Navbar() {
         id="menu-principal"
         className={`${open ? 'flex' : 'hidden'} w-full flex-col gap-2 border-t border-cardborderalt pt-4 lg:flex lg:w-auto lg:flex-row lg:border-0 lg:pt-0`}
       >
-        {navigation.map((item) => (
+        {links.map((item) => (
           <li key={item.to}>
             <NavLink
               to={item.to}
@@ -56,6 +59,20 @@ export default function Navbar() {
             </NavLink>
           </li>
         ))}
+        {autenticado && (
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                logout();
+                setOpen(false);
+              }}
+              className="flex min-h-11 w-full items-center rounded-lg border border-transparent px-3 py-2 text-sm text-nav transition-colors hover:bg-card hover:text-white"
+            >
+              Sair
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );

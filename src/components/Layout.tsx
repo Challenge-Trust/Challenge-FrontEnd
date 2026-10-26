@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { navigation } from '../data/navigation';
+import { extraTitles, guestNavigation, navigation, userNavigation } from '../data/navigation';
 import { team } from '../data/team';
 import Header from './Header';
 import Footer from './Footer';
@@ -11,11 +11,13 @@ export default function Layout() {
   const previousPath = useRef(pathname);
 
   useEffect(() => {
-    const page = navigation.find((item) => item.to === pathname);
+    const page = [...navigation, ...guestNavigation, ...userNavigation].find(
+      (item) => item.to === pathname,
+    );
     const member = pathname.startsWith('/quem-somos/')
       ? team.find((item) => pathname === `/quem-somos/${item.id}`)
       : undefined;
-    document.title = `${page?.label ?? member?.name ?? 'Página não encontrada'} · SoulUp`;
+    document.title = `${page?.label ?? extraTitles[pathname] ?? member?.name ?? 'Página não encontrada'} · SoulUp`;
     if (previousPath.current !== pathname) {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       main.current?.focus({ preventScroll: true });

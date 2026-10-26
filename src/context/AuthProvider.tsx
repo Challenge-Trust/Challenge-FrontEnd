@@ -1,0 +1,27 @@
+import { useCallback, useMemo, useState, type PropsWithChildren } from 'react';
+import { lerSessao, salvarSessao } from '../services/api';
+import { authService } from '../services/authService';
+import type { LoginRequest, SessaoUsuario } from '../types';
+import { AuthContext } from './authContext';
+
+export function AuthProvider({ children }: PropsWithChildren) {
+  const [sessao, setSessao] = useState<SessaoUsuario | null>(lerSessao);
+
+  const login = useCallback(async (data: LoginRequest) => {
+    const resposta = await authService.login(data);
+    salvarSessao(resposta);
+    setSessao(resposta);
+  }, []);
+
+  const logout = useCallback(() => {
+    salvarSessao(null);
+    setSessao(null);
+  }, []);
+
+  const value = useMemo(
+    () => ({ sessao, autenticado: sessao !== null, login, logout }),
+    [sessao, login, logout],
+  );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}

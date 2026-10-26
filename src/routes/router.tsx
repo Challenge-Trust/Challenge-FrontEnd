@@ -7,7 +7,12 @@ import QuemSomosDetalhe from '../pages/QuemSomosDetalhe';
 import Faq from '../pages/Faq';
 import Contato from '../pages/Contato';
 import Conversao from '../pages/Conversao';
+import Login from '../pages/Login';
+import Cadastro from '../pages/Cadastro';
+import EsqueciSenha from '../pages/EsqueciSenha';
+import Painel from '../pages/Painel';
 import NotFound from '../pages/NotFound';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +26,10 @@ export const router = createBrowserRouter([
       { path: 'faq', element: <Faq /> },
       { path: 'contato', element: <Contato /> },
       { path: 'conversao', element: <Conversao /> },
+      { path: 'login', element: <Login /> },
+      { path: 'cadastro', element: <Cadastro /> },
+      { path: 'esqueci-senha', element: <EsqueciSenha /> },
+      { element: <ProtectedRoute />, children: [{ path: 'painel', element: <Painel /> }] },
       { path: '*', element: <NotFound /> },
     ],
   },
