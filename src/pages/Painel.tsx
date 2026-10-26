@@ -83,7 +83,8 @@ export default function Painel() {
             Olá, {sessao.name.split(' ')[0]}!
           </h1>
           <p className="mt-2 text-sm text-muted">
-            {formatarNumero(sessao.viewMinutes)} minutos assistidos cadastrados
+            {formatarNumero(sessao.viewMinutes)} minutos acumulados para o próximo ponto (cada 180
+            minutos assistidos = 1 ponto)
           </p>
         </div>
         <Button variant="secondary" onClick={logout} className="w-full sm:w-auto">
