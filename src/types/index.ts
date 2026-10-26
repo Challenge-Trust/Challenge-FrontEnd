@@ -61,7 +61,15 @@ export interface RecuperarSenhaRequest {
 }
 
 export interface MensagemResponse {
-  message: string;
+  mensagem: string;
+}
+
+/** Corpo padrão de erro da API Java (GlobalExceptionHandler). */
+export interface ErroApi {
+  status: number;
+  erro: string;
+  mensagem: string;
+  timestamp: string;
 }
 
 /** Ticket.java (tabela passagem). dataEmissao chega como ISO-8601. */

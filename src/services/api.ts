@@ -1,4 +1,4 @@
-import type { SessaoUsuario } from '../types';
+import type { ErroApi, SessaoUsuario } from '../types';
 
 /** URL base da API Spring Boot. Em produção (Vercel) defina VITE_API_URL. */
 export const API_URL = (import.meta.env.VITE_API_URL ?? 'http://localhost:8080').replace(/\/$/, '');
@@ -74,9 +74,9 @@ export async function request<T>(path: string, options: RequestOptions = {}): Pr
 
 async function lerMensagemDeErro(response: Response): Promise<string> {
   try {
-    const data = (await response.json()) as { message?: string; error?: string };
-    if (data.message) return data.message;
-    if (data.error) return data.error;
+    const data = (await response.json()) as Partial<ErroApi>;
+    if (data.mensagem) return data.mensagem;
+    if (data.erro) return data.erro;
   } catch {
     /* corpo vazio ou não-JSON */
   }
