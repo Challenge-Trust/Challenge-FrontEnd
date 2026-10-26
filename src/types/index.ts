@@ -80,11 +80,11 @@ export interface Ticket {
   dataEmissao: string;
 }
 
-/** Points.java (tabela pontos). */
+/** Points.java (tabela T_SU_PONTOS): saldo de pontos, 1 registro por usuário. */
 export interface Pontos {
   id: number;
   usuarioId: number;
-  points: number;
+  earnedPoints: number;
   dataAtualizacao: string;
 }
 

@@ -107,7 +107,7 @@ export default function Painel() {
 function Resumo({ dados }: { dados: DadosPainel }) {
   const totalTickets = dados.tickets.reduce((soma, t) => soma + t.tickets, 0);
   const totalCo2 = dados.co2.reduce((soma, c) => soma + c.co2Economizado, 0);
-  const saldoPontos = dados.pontos?.points ?? 0;
+  const saldoPontos = dados.pontos?.earnedPoints ?? 0;
 
   const indicadores = [
     { rotulo: 'Pontos', valor: formatarNumero(saldoPontos), unidade: 'pts' },
