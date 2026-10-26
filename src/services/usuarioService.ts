@@ -1,4 +1,4 @@
-import type { Co2Economia, Pontos, Ticket } from '../types';
+import type { Co2Economia, Pontos, Selo, Ticket } from '../types';
 import { request } from './api';
 
 export const usuarioService = {
@@ -13,4 +13,8 @@ export const usuarioService = {
   /** GET /api/usuarios/{id}/co2 */
   listarCo2: (id: number, signal?: AbortSignal) =>
     request<Co2Economia[]>(`/api/usuarios/${id}/co2`, { signal }),
+
+  /** GET /api/usuarios/{id}/selo */
+  buscarSelo: (id: number, signal?: AbortSignal) =>
+    request<Selo>(`/api/usuarios/${id}/selo`, { signal }),
 };
