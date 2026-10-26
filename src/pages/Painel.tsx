@@ -19,6 +19,9 @@ const formatarData = (iso: string) =>
 const formatarNumero = (n: number) =>
   n.toLocaleString('pt-BR', { maximumFractionDigits: 2, minimumFractionDigits: 0 });
 
+/** A API calcula o CO₂ economizado em gramas; no painel exibimos em kg. */
+const gramasParaKg = (gramas: number) => gramas / 1000;
+
 /** Usuário sem registro de pontos ainda: a API pode responder 404, tratado como saldo zero. */
 const pontosOuNulo = (promise: Promise<Pontos>) =>
   promise.catch((error: unknown) => {
@@ -106,7 +109,7 @@ export default function Painel() {
 
 function Resumo({ dados }: { dados: DadosPainel }) {
   const totalTickets = dados.tickets.reduce((soma, t) => soma + t.tickets, 0);
-  const totalCo2 = dados.co2.reduce((soma, c) => soma + c.co2Economizado, 0);
+  const totalCo2 = gramasParaKg(dados.co2.reduce((soma, c) => soma + c.co2Economizado, 0));
   const saldoPontos = dados.pontos?.earnedPoints ?? 0;
 
   const indicadores = [
@@ -158,7 +161,7 @@ function Resumo({ dados }: { dados: DadosPainel }) {
               {dados.co2.map((c) => (
                 <li key={c.id} className="flex items-center justify-between gap-4 py-3 text-sm">
                   <span className="min-w-0 text-body">
-                    {formatarNumero(c.co2Economizado)} kg
+                    {formatarNumero(gramasParaKg(c.co2Economizado))} kg
                     <span className="block text-xs text-faint">
                       {formatarNumero(c.distanciaKm)} km · {c.passageiroOnibus}{' '}
                       {c.passageiroOnibus === 1 ? 'passageiro' : 'passageiros'}
