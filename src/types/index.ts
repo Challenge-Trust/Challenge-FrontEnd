@@ -61,7 +61,15 @@ export interface RecuperarSenhaRequest {
 }
 
 export interface MensagemResponse {
-  message: string;
+  mensagem: string;
+}
+
+/** Corpo padrão de erro da API Java (GlobalExceptionHandler). */
+export interface ErroApi {
+  status: number;
+  erro: string;
+  mensagem: string;
+  timestamp: string;
 }
 
 /** Ticket.java (tabela passagem). dataEmissao chega como ISO-8601. */
@@ -72,11 +80,11 @@ export interface Ticket {
   dataEmissao: string;
 }
 
-/** Points.java (tabela pontos). */
+/** Points.java (tabela T_SU_PONTOS): saldo de pontos, 1 registro por usuário. */
 export interface Pontos {
   id: number;
   usuarioId: number;
-  points: number;
+  earnedPoints: number;
   dataAtualizacao: string;
 }
 
@@ -88,6 +96,16 @@ export interface Co2Economia {
   co2Economizado: number;
   passageiroOnibus: number;
   dataCalculo: string;
+}
+
+/** Union type: selos possíveis conforme o CO₂ total economizado. */
+export type SeloSustentavel = 'Bronze' | 'Prata' | 'Ouro';
+
+/** GET /api/usuarios/{id}/selo (totalCo2Economizado em gramas). */
+export interface Selo {
+  usuarioId: number;
+  totalCo2Economizado: number;
+  selo: SeloSustentavel;
 }
 
 /** Estado genérico de dados vindos da API. */

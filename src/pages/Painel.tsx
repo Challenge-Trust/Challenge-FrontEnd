@@ -5,12 +5,13 @@ import Card from '../components/Card';
 import { useAuth } from '../hooks/useAuth';
 import { ApiError } from '../services/api';
 import { usuarioService } from '../services/usuarioService';
-import type { AsyncState, Co2Economia, Pontos, Ticket } from '../types';
+import type { AsyncState, Co2Economia, Pontos, Selo, Ticket } from '../types';
 
 interface DadosPainel {
   tickets: Ticket[];
   pontos: Pontos | null;
   co2: Co2Economia[];
+  selo: Selo;
 }
 
 const formatarData = (iso: string) =>
@@ -18,6 +19,9 @@ const formatarData = (iso: string) =>
 
 const formatarNumero = (n: number) =>
   n.toLocaleString('pt-BR', { maximumFractionDigits: 2, minimumFractionDigits: 0 });
+
+/** A API calcula o CO₂ economizado em gramas; no painel exibimos em kg. */
+const gramasParaKg = (gramas: number) => gramas / 1000;
 
 /** Usuário sem registro de pontos ainda: a API pode responder 404, tratado como saldo zero. */
 const pontosOuNulo = (promise: Promise<Pontos>) =>
@@ -41,9 +45,10 @@ export default function Painel() {
       usuarioService.listarTickets(usuarioId, signal),
       pontosOuNulo(usuarioService.buscarPontos(usuarioId, signal)),
       usuarioService.listarCo2(usuarioId, signal),
+      usuarioService.buscarSelo(usuarioId, signal),
     ])
-      .then(([tickets, pontos, co2]) =>
-        setEstado({ status: 'success', data: { tickets, pontos, co2 } }),
+      .then(([tickets, pontos, co2, selo]) =>
+        setEstado({ status: 'success', data: { tickets, pontos, co2, selo } }),
       )
       .catch((error: unknown) => {
         if (error instanceof DOMException && error.name === 'AbortError') return;
@@ -78,7 +83,8 @@ export default function Painel() {
             Olá, {sessao.name.split(' ')[0]}!
           </h1>
           <p className="mt-2 text-sm text-muted">
-            {formatarNumero(sessao.viewMinutes)} minutos assistidos cadastrados
+            {formatarNumero(sessao.viewMinutes)} minutos acumulados para o próximo ponto (cada 180
+            minutos assistidos = 1 ponto)
           </p>
         </div>
         <Button variant="secondary" onClick={logout} className="w-full sm:w-auto">
@@ -106,18 +112,20 @@ export default function Painel() {
 
 function Resumo({ dados }: { dados: DadosPainel }) {
   const totalTickets = dados.tickets.reduce((soma, t) => soma + t.tickets, 0);
-  const totalCo2 = dados.co2.reduce((soma, c) => soma + c.co2Economizado, 0);
-  const saldoPontos = dados.pontos?.points ?? 0;
+  const totalCo2 = gramasParaKg(dados.co2.reduce((soma, c) => soma + c.co2Economizado, 0));
+  const saldoPontos = dados.pontos?.earnedPoints ?? 0;
 
   const indicadores = [
     { rotulo: 'Pontos', valor: formatarNumero(saldoPontos), unidade: 'pts' },
     { rotulo: 'Tickets', valor: formatarNumero(totalTickets), unidade: 'tickets' },
     { rotulo: 'CO₂ economizado', valor: formatarNumero(totalCo2), unidade: 'kg' },
+
+    { rotulo: 'Selo sustentável', valor: dados.selo.selo, unidade: '' },
   ];
 
   return (
     <>
-      <dl className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <dl className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {indicadores.map((item) => (
           <Card key={item.rotulo} padding="compact">
             <dt className="text-xs uppercase tracking-wide text-faint">{item.rotulo}</dt>
@@ -158,7 +166,7 @@ function Resumo({ dados }: { dados: DadosPainel }) {
               {dados.co2.map((c) => (
                 <li key={c.id} className="flex items-center justify-between gap-4 py-3 text-sm">
                   <span className="min-w-0 text-body">
-                    {formatarNumero(c.co2Economizado)} kg
+                    {formatarNumero(gramasParaKg(c.co2Economizado))} kg
                     <span className="block text-xs text-faint">
                       {formatarNumero(c.distanciaKm)} km · {c.passageiroOnibus}{' '}
                       {c.passageiroOnibus === 1 ? 'passageiro' : 'passageiros'}
