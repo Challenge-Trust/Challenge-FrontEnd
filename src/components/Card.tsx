@@ -21,7 +21,7 @@ export default function Card({
   return (
     <div
       {...props}
-      className={`min-w-0 rounded-2xl border border-cardborder bg-card ${spacing[padding]} ${hoverBrand ? 'transition-colors hover:border-accent' : ''} ${className}`}
+      className={`min-w-0 rounded-2xl border border-cardborder bg-card bg-[linear-gradient(145deg,rgba(85,131,218,0.1),transparent_65%)] shadow-[0_16px_40px_-24px_rgba(0,0,0,0.65)] ${spacing[padding]} ${hoverBrand ? 'transition-colors hover:border-accent' : ''} ${className}`}
     >
       {children}
     </div>

@@ -5,6 +5,7 @@ import Alert from '../components/Alert';
 import AuthShell from '../components/AuthShell';
 import Button from '../components/Button';
 import FormField from '../components/FormField';
+import { controlClass } from '../components/formStyles';
 import { useAuth } from '../hooks/useAuth';
 import { ApiError } from '../services/api';
 import type { LocationState } from '../types';
@@ -59,7 +60,7 @@ export default function Login() {
             aria-required="true"
             aria-invalid={Boolean(errors.cpf)}
             aria-describedby={errors.cpf ? 'cpf-error' : undefined}
-            className="form-control"
+            className={controlClass}
             {...register('cpf', {
               required: 'Informe seu CPF.',
               validate: (v) => cpfValido(v) || 'CPF inválido.',
@@ -77,7 +78,7 @@ export default function Login() {
             aria-required="true"
             aria-invalid={Boolean(errors.password)}
             aria-describedby={errors.password ? 'password-error' : undefined}
-            className="form-control"
+            className={controlClass}
             {...register('password', { required: 'Informe sua senha.' })}
           />
         </FormField>

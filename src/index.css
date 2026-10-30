@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 
+/* Paleta da SoulUp: o Tailwind gera as classes bg-*, text-* e border-* a partir destes tokens. */
 @theme {
   --font-sans: 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
 
@@ -21,111 +22,25 @@
   --color-nav: #bdcbe2;
 }
 
-/* Shared palette: Tailwind generates the color classes used by every page. */
+/* Padrões globais aplicados só com utilitários do Tailwind (@apply). */
 @layer base {
   html {
-    color-scheme: dark;
+    @apply scheme-dark;
   }
 
   body {
-    margin: 0;
-    min-width: 320px;
-    background-color: var(--color-base);
-    background-image:
-      radial-gradient(ellipse at 50% 0%, rgba(57, 99, 192, 0.16), transparent 65%),
-      linear-gradient(rgba(133, 163, 218, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(133, 163, 218, 0.025) 1px, transparent 1px);
-    background-size:
-      100% 100%,
-      50px 50px,
-      50px 50px;
-    color: var(--color-body);
-    font-family: var(--font-sans);
+    @apply m-0 min-w-80 bg-base font-sans text-body;
   }
 
   ::selection {
-    background: #3654a0;
-    color: #fff;
+    @apply bg-[#3654a0] text-white;
   }
 
   :where(a, button, input, select, textarea):focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 4px;
+    @apply outline-2 outline-offset-4 outline-accent;
   }
 
-  button,
-  select {
-    cursor: pointer;
-  }
-}
-
-@layer components {
-  :where(.bg-card, .bg-cardalt) {
-    background-image: linear-gradient(145deg, rgba(85, 131, 218, 0.1), transparent 65%);
-    box-shadow: 0 16px 40px -24px rgba(0, 0, 0, 0.65);
-  }
-
-  :where(a, button).bg-brand {
-    background-image: linear-gradient(135deg, rgba(153, 180, 255, 0.16), transparent);
-    box-shadow: 0 8px 24px -12px rgba(66, 99, 220, 0.8);
-  }
-
-  :where(input, select, textarea) {
-    transition:
-      border-color 180ms ease,
-      box-shadow 180ms ease;
-  }
-
-  :where(input, textarea)::placeholder {
-    color: #879bbd;
-    opacity: 1;
-  }
-
-  :where(input, select, textarea):focus {
-    box-shadow: 0 0 0 3px rgba(151, 182, 255, 0.15);
-  }
-
-  .form-control {
-    width: 100%;
-    min-width: 0;
-    min-height: 44px;
-    border: 1px solid var(--color-cardborder);
-    border-radius: 0.5rem;
-    background: var(--color-base);
-    padding: 0.75rem 1rem;
-    color: var(--color-body);
-    font-size: 1rem;
-  }
-
-  .form-control:focus {
-    border-color: var(--color-accent);
-  }
-
-  .form-control[aria-invalid='true'] {
-    border-color: #fca5a5;
-  }
-
-  .skip-link {
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    z-index: 60;
-    transform: translateY(-200%);
-    border-radius: 0.5rem;
-    background: var(--color-card);
-    padding: 0.75rem 1rem;
-    color: var(--color-heading);
-  }
-
-  .skip-link:focus {
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
+  :where(button, select) {
+    @apply cursor-pointer;
   }
 }

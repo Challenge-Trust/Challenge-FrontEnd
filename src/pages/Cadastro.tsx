@@ -5,6 +5,7 @@ import Alert from '../components/Alert';
 import AuthShell from '../components/AuthShell';
 import Button from '../components/Button';
 import FormField from '../components/FormField';
+import { controlClass } from '../components/formStyles';
 import { useAuth } from '../hooks/useAuth';
 import { ApiError } from '../services/api';
 import { authService } from '../services/authService';
@@ -71,7 +72,7 @@ export default function Cadastro() {
             aria-required="true"
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? 'name-error' : undefined}
-            className="form-control"
+            className={controlClass}
             {...register('name', {
               validate: (v) => {
                 const nome = v.trim();
@@ -93,7 +94,7 @@ export default function Cadastro() {
             aria-required="true"
             aria-invalid={Boolean(errors.cpf)}
             aria-describedby={errors.cpf ? 'cpf-error' : undefined}
-            className="form-control"
+            className={controlClass}
             {...register('cpf', {
               required: 'Informe seu CPF.',
               validate: (v) => cpfValido(v) || 'CPF inválido.',
@@ -112,7 +113,7 @@ export default function Cadastro() {
               aria-required="true"
               aria-invalid={Boolean(errors.password)}
               aria-describedby={errors.password ? 'password-error' : undefined}
-              className="form-control"
+              className={controlClass}
               {...register('password', {
                 required: 'Crie uma senha.',
                 minLength: { value: 6, message: 'A senha deve ter pelo menos 6 caracteres.' },
@@ -135,7 +136,7 @@ export default function Cadastro() {
               aria-required="true"
               aria-invalid={Boolean(errors.confirmPassword)}
               aria-describedby={errors.confirmPassword ? 'confirmPassword-error' : undefined}
-              className="form-control"
+              className={controlClass}
               {...register('confirmPassword', {
                 required: 'Confirme a senha.',
                 validate: (v) => v === getValues('password') || 'As senhas não conferem.',
@@ -160,7 +161,7 @@ export default function Cadastro() {
             aria-required="true"
             aria-invalid={Boolean(errors.viewMinutes)}
             aria-describedby={errors.viewMinutes ? 'viewMinutes-error' : undefined}
-            className="form-control"
+            className={controlClass}
             {...register('viewMinutes', {
               required: 'Informe os minutos assistidos.',
               validate: (v) =>

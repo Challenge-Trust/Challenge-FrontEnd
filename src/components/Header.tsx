@@ -5,7 +5,10 @@ import Navbar from './Navbar';
 export default function Header() {
   return (
     <header className="border-b border-cardborderalt bg-navbg">
-      <a href="#conteudo" className="skip-link">
+      <a
+        href="#conteudo"
+        className="absolute left-2 top-2 z-60 -translate-y-[200%] rounded-lg bg-card px-4 py-3 text-heading focus:translate-y-0"
+      >
         Pular para o conteúdo
       </a>
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-4 sm:px-10">
@@ -14,7 +17,9 @@ export default function Header() {
           className="inline-flex min-h-11 items-center gap-3 text-2xl font-bold text-white"
         >
           <img src={logo} alt="" width={36} height={36} className="h-9 w-9" />
-          Trust<span className="text-accent">Corp.</span>
+          <span>
+            Trust<span className="text-accent">Corp.</span>
+          </span>
         </Link>
         <Navbar />
       </div>
