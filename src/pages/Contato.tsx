@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import FormField from '../components/FormField';
+import { controlClass } from '../components/formStyles';
 import Modal from '../components/Modal';
 import type { ContactFormData } from '../types';
 
@@ -73,7 +74,7 @@ export default function Contato() {
                 aria-required="true"
                 aria-invalid={Boolean(errors.nome)}
                 aria-describedby={errors.nome ? 'nome-error' : undefined}
-                className="form-control"
+                className={controlClass}
                 {...register('nome', {
                   validate: (value) => value.trim().length > 0 || 'Informe seu nome.',
                 })}
@@ -88,7 +89,7 @@ export default function Contato() {
                 aria-required="true"
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? 'email-error' : undefined}
-                className="form-control"
+                className={controlClass}
                 {...register('email', {
                   required: 'Informe seu e-mail.',
                   pattern: {
@@ -101,7 +102,7 @@ export default function Contato() {
           </div>
           <div className="mb-5">
             <FormField id="assunto" label="Assunto">
-              <select id="assunto" className="form-control" {...register('assunto')}>
+              <select id="assunto" className={controlClass} {...register('assunto')}>
                 <option value="" disabled>
                   Selecione um assunto
                 </option>
@@ -121,7 +122,7 @@ export default function Contato() {
                 aria-required="true"
                 aria-invalid={Boolean(errors.mensagem)}
                 aria-describedby={errors.mensagem ? 'mensagem-error' : undefined}
-                className="form-control resize-y"
+                className={`${controlClass} resize-y`}
                 {...register('mensagem', {
                   required: 'Escreva sua mensagem.',
                   validate: (value) =>

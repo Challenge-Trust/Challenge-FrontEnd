@@ -5,6 +5,7 @@ import Alert from '../components/Alert';
 import AuthShell from '../components/AuthShell';
 import Button from '../components/Button';
 import FormField from '../components/FormField';
+import { controlClass } from '../components/formStyles';
 import { ApiError } from '../services/api';
 import { authService } from '../services/authService';
 import { apenasDigitos, cpfValido, mascararCpf } from '../utils/cpf';
@@ -72,7 +73,7 @@ export default function EsqueciSenha() {
             aria-required="true"
             aria-invalid={Boolean(errors.cpf)}
             aria-describedby={errors.cpf ? 'cpf-error' : undefined}
-            className="form-control"
+            className={controlClass}
             {...register('cpf', {
               required: 'Informe seu CPF.',
               validate: (v) => cpfValido(v) || 'CPF inválido.',
@@ -90,7 +91,7 @@ export default function EsqueciSenha() {
             aria-required="true"
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? 'name-error' : undefined}
-            className="form-control"
+            className={controlClass}
             {...register('name', {
               validate: (v) => v.trim().length > 0 || 'Informe o nome cadastrado.',
             })}
@@ -112,7 +113,7 @@ export default function EsqueciSenha() {
               aria-required="true"
               aria-invalid={Boolean(errors.newPassword)}
               aria-describedby={errors.newPassword ? 'newPassword-error' : undefined}
-              className="form-control"
+              className={controlClass}
               {...register('newPassword', {
                 required: 'Crie uma nova senha.',
                 minLength: { value: 6, message: 'A senha deve ter pelo menos 6 caracteres.' },
@@ -135,7 +136,7 @@ export default function EsqueciSenha() {
               aria-required="true"
               aria-invalid={Boolean(errors.confirmPassword)}
               aria-describedby={errors.confirmPassword ? 'confirmPassword-error' : undefined}
-              className="form-control"
+              className={controlClass}
               {...register('confirmPassword', {
                 required: 'Confirme a senha.',
                 validate: (v) => v === getValues('newPassword') || 'As senhas não conferem.',
