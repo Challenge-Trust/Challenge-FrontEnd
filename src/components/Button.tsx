@@ -8,7 +8,7 @@ const appearances: Record<Variant, string> = {
   primary:
     'bg-brand bg-[linear-gradient(135deg,rgba(153,180,255,0.16),transparent)] text-white shadow-[0_8px_24px_-12px_rgba(66,99,220,0.8)] hover:bg-brandhover',
   secondary: 'border border-cardborder bg-base/40 text-muted hover:border-accent hover:text-white',
-  danger: 'bg-red-600 text-white hover:bg-red-700',
+  danger: 'border border-red-400/50 bg-red-500/15 text-red-100 hover:bg-red-600 hover:text-white',
 };
 
 type Appearance = {
