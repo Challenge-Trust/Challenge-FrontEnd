@@ -1,172 +1,215 @@
-# TrustCorp · SoulUp 🚀
+# SoulUp · TrustCorp
 
-> **Assista conteúdos, acumule pontos e transforme em mobilidade!**
+> **Assista conteúdos, acumule pontos e transforme em mobilidade.**
 
-O SoulUp é uma rede social criada para incentivar o consumo de conteúdos relevantes e educativos de forma recompensadora. Os usuários assistem vídeos, acumulam pontos por participação e podem trocar esses pontos por créditos para transporte público — tornando o acesso à mobilidade mais acessível.
+A SoulUp é uma rede social de impacto: o usuário assiste vídeos educativos e cada **180 minutos
+assistidos viram 1 ponto**. A cada **10 pontos ele recebe 1 ticket de transporte público**. A
+plataforma também calcula o **CO₂ que deixa de ser emitido** quando o usuário troca o carro pelo
+ônibus e concede um **selo sustentável** (Bronze, Prata ou Ouro).
+
+Este repositório é o **front-end** (SPA em React). Ele consome a API Java da solução:
+[Challenge-Trust/java-challenge2](https://github.com/Challenge-Trust/java-challenge2).
 
 ---
 
 ## 📋 Índice
 
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Como Executar](#como-executar)
-- [Equipe](#equipe)
-- [Status do Projeto](#status-do-projeto)
+1. [Tecnologias utilizadas](#-tecnologias-utilizadas)
+2. [Estrutura de pastas](#-estrutura-de-pastas)
+3. [Autores e créditos](#-autores-e-créditos)
+4. [Imagens e ícones](#-imagens-e-ícones)
+5. [Como usar](#-como-usar)
+6. [Rotas e integração com a API](#-rotas-e-integração-com-a-api)
+7. [Contato](#-contato)
 
 ---
 
-## Sobre o Projeto
+## 🛠 Tecnologias utilizadas
 
-O SoulUp une entretenimento, aprendizado e impacto social, criando uma experiência onde o tempo investido em conteúdo gera benefícios reais no dia a dia.
+| Tecnologia                         | Uso                                                             |
+| ---------------------------------- | --------------------------------------------------------------- |
+| React 19 + Vite 7                  | SPA e servidor de desenvolvimento/build                         |
+| TypeScript 5.9 (modo `strict`)     | Tipagem de componentes, serviços e respostas da API (sem `any`) |
+| Tailwind CSS 4                     | Toda a estilização (tema em `@theme`, sem CSS manual)           |
+| React Router DOM 7                 | Rotas estáticas, dinâmicas (`:id`), protegidas e 404            |
+| `fetch` nativo                     | Todas as requisições HTTP (sem Axios)                           |
+| React Hook Form                    | Estado e validação dos formulários                              |
+| ESLint + Prettier + GitHub Actions | Qualidade e padronização do código a cada push                  |
+| Vercel                             | Hospedagem (rewrite de SPA em `vercel.json`)                    |
 
-### Funcionalidades previstas
+Recursos de React usados: `useState`, `useEffect`, `useContext` (sessão do usuário),
+`useRef`, `useCallback`, `useMemo` e hooks próprios (`useAuth`, `useFetch`,
+`useExclusaoUsuario`, `useExclusaoViagem`).
 
-- 📺 Feed de vídeos educativos e relevantes
-- 🏆 Sistema de pontuação por engajamento
-- 🚌 Conversão de pontos em créditos de transporte público
-- 🤖 Assistente virtual com IA integrado ao APP
-- 👤 Perfil de usuário com histórico de pontos
-
----
-
-## 🛠 Tecnologias Utilizadas
-
-### Front-End (este repositório)
-
-- React
-- Vite
-- TypeScript
-- CSS3
-- Tailwind CSS 4 e React Hook Form
-
-### Back-End _(em desenvolvimento)_
-
-- Java
-- Python
-- Banco de Dados Relacional _(integração futura)_
-
-### Outros
-
-- Assistente de IA _(projeto paralelo para o APP SoulUp)_
+Recursos de TypeScript: interfaces (`Usuario`, `Co2Economia`, `ErroApi`…), **union types**
+(`RequestStatus`, `SeloSustentavel`, `AsyncState<T>`) e **intersection types**
+(`SessaoUsuario = Usuario & { token?: string }`, `UsuarioRequest`).
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura de pastas
 
 ```
 Challenge-FrontEnd/
-│
-├── index.html              # Entrada do Vite
-├── src/
-│   ├── components/         # Componentes compartilhados
-│   ├── pages/              # Páginas React
-│   ├── routes/             # Rotas centralizadas e fallback 404
-│   ├── data/               # Dados de navegação, equipe e FAQ
-│   ├── types/              # Tipos TypeScript compartilhados
-│   ├── index.css           # Tema global e componentes de estilo
-│   ├── App.tsx             # Provedor do React Router
-│   └── main.tsx            # Entrada React
 ├── public/
-│   └── img/                # Imagens e assets
-├── .github/workflows/      # Validação automática de pushes e PRs
-├── package.json
-└── vite.config.ts
+│   ├── favicon.svg          # Ícone da aba
+│   └── img/                 # Fotos dos integrantes e logos
+├── src/
+│   ├── assets/              # Logo da SoulUp (importada pelo Header)
+│   ├── components/          # Componentes reutilizáveis (Button, Card, Header, ConfirmDialog,
+│   │                        #   LoadingState, ErrorState, EmptyState, ResumoUsuario…)
+│   ├── contexts/            # AuthContext + AuthProvider (sessão do usuário)
+│   ├── data/                # Conteúdo estático: menu, FAQ e equipe
+│   ├── hooks/               # useAuth, useFetch, useExclusaoUsuario, useExclusaoViagem
+│   ├── pages/               # Uma página por rota
+│   ├── routes/              # router.tsx (todas as rotas da SPA)
+│   ├── services/            # Camada de API: api.ts (fetch), authService, usuarioService, co2Service
+│   ├── types/               # Tipos que espelham o JSON da API Java
+│   ├── utils/               # CPF, formatação, cálculo de prévia, leitura de :id
+│   ├── index.css            # Tailwind + tema (@theme)
+│   ├── App.tsx              # AuthProvider + RouterProvider
+│   └── main.tsx             # Ponto de entrada
+├── .env.example             # VITE_API_URL
+├── vercel.json              # Rewrite de SPA
+├── index.html
+├── package.json / package-lock.json
+├── tsconfig*.json
+└── vite.config.ts           # React + plugin do Tailwind
 ```
 
 ---
 
-## ▶️ Como Executar
+## 👥 Autores e créditos
 
-Este projeto utiliza React, Vite e TypeScript.
+Turma **1TDSPI** · FIAP · 2026 · Equipe **TrustCorp**
 
-Requisitos: Node.js 22.12 ou superior na linha 22, ou Node.js 24, com npm.
-Utilize apenas npm neste projeto para respeitar o `package-lock.json`.
+| Foto                                                                       | Nome            | RM     | Função                          | GitHub                                                            | LinkedIn                                                                        |
+| -------------------------------------------------------------------------- | --------------- | ------ | ------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| <img src="public/img/nicolas.jpeg" width="70" alt="Nicolas Martins">       | Nicolas Martins | 573178 | Desenvolvedor de Software Java  | [NickRM22](https://github.com/NickRM22)                           | [LinkedIn](https://www.linkedin.com/in/nicolas-rodrigues-martins-126607360)     |
+| <img src="public/img/henrique.jpeg" width="70" alt="Henrique Soares">      | Henrique Soares | 573618 | Desenvolvedor de Banco de Dados | [henriquesoaresserra-h](https://github.com/henriquesoaresserra-h) | [LinkedIn](https://www.linkedin.com/in/henrique-s-s-47419a3aa/)                 |
+| <img src="public/img/vinicius.jpeg" width="70" alt="Vinicius Soares">      | Vinicius Soares | 573351 | Desenvolvedor Front-End e Java  | [vinisl2510-sudo](https://github.com/vinisl2510-sudo)             | [LinkedIn](https://www.linkedin.com/in/vin%C3%ADcius-soares-loureiro-9bb96b34b) |
+| <img src="public/img/nicolas_frazao.jpeg" width="70" alt="Nicolas Frazão"> | Nicolas Frazão  | 568780 | Desenvolvedor de Agente Virtual | [Frazaomol](https://github.com/Frazaomol)                         | [LinkedIn](https://www.linkedin.com/in/nicolas-molina-3a9257355)                |
+| <img src="public/img/caua.png" width="70" alt="Cauã Bertini">              | Cauã Bertini    | 570451 | Desenvolvedor Python            | [cauabertini](https://github.com/cauabertini)                     | [LinkedIn](https://www.linkedin.com/in/caua-mathias-bertini)                    |
 
-Link Repositório:
-https://github.com/Challenge-Trust/Challenge-FrontEnd
+---
 
-1. Clone o repositório:
+## 🖼 Imagens e ícones
+
+| Arquivo                                                                                               | Onde aparece                                |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `src/assets/logo.svg` / `public/favicon.svg`                                                          | Logo da SoulUp no cabeçalho e ícone da aba  |
+| `public/img/*.jpeg`, `public/img/caua.png`                                                            | Fotos dos integrantes (`/integrantes`)      |
+| `public/img/java-logo.png`, `python-logo.png`, `html-logo.png`, `ia-logo.png`, `datamodeler-logo.png` | Área de atuação de cada integrante          |
+| `public/img/github-logo.png`, `linkedin-logo.png`                                                     | Links do perfil de cada integrante          |
+| Emojis (🎥 🎯 🚌 🗂️)                                                                                  | Ícones decorativos (sem biblioteca externa) |
+
+### Telas
+
+> Prints das telas: **[PREENCHER]** — adicionar em `docs/` e referenciar aqui
+> (Home, Login, Painel, Usuários, Detalhe do usuário, Viagens, Conversão, mobile).
+
+---
+
+## ▶️ Como usar
+
+- **Repositório:** <https://github.com/Challenge-Trust/Challenge-FrontEnd>
+- **Aplicação publicada (Vercel):** **[PREENCHER APÓS O DEPLOY]**
+- **API publicada (Render):** **[PREENCHER APÓS O DEPLOY]**
+- **Vídeo de apresentação (YouTube):** **[PREENCHER]**
+
+### Requisitos
+
+- Node.js 22.12+ (ou 24 LTS) com npm
+- A API Java rodando (local em `http://localhost:8080` ou publicada)
+
+### Instalação e execução
 
 ```bash
 git clone https://github.com/Challenge-Trust/Challenge-FrontEnd.git
-```
-
-2. Acesse a pasta do projeto:
-
-```bash
 cd Challenge-FrontEnd
+cp .env.example .env        # ajuste VITE_API_URL se a API não estiver em localhost:8080
+npm install
+npm run dev                 # abre em http://localhost:5173
 ```
 
-3. Instale as dependências e inicie o servidor de desenvolvimento:
+No PowerShell, se `npm.ps1` estiver bloqueado, use `npm.cmd install` e `npm.cmd run dev`.
+
+Usuários de exemplo (criados pelo `script.sql` da API), senha `senha123`:
+
+- Ana Silva — CPF `529.982.247-25`
+- Bruno Costa — CPF `111.444.777-35`
+
+### Outros scripts
 
 ```bash
-npm ci
-npm run dev
+npm run build     # verificação de tipos + build de produção em dist/
+npm run preview   # serve o build localmente
+npm run check     # Prettier + ESLint + build (mesma validação do GitHub Actions)
 ```
 
-4. Abra o endereço exibido pelo Vite no navegador.
+### Deploy na Vercel
 
-No PowerShell, use `npm.cmd ci` e `npm.cmd run dev` caso a execução de `npm.ps1` esteja bloqueada.
-Execute os comandos dentro de `Challenge-FrontEnd`, onde fica o `package.json`.
+1. Em <https://vercel.com>, **Add New → Project** e importe este repositório (framework: Vite).
+2. Em **Settings → Environment Variables**, crie `VITE_API_URL` com a URL da API no Render
+   (sem `/` no final) para Production, Preview e Development.
+3. Faça o deploy. O `vercel.json` já redireciona todas as rotas para o `index.html`.
+4. Copie a URL gerada e cadastre-a na variável `FRONT_URL` da API (CORS).
 
-### Verificação e preview
+> Variáveis `VITE_*` são lidas no build: depois de alterar `VITE_API_URL`, faça **Redeploy**.
 
-```bash
-npm run check
-npm run preview
+### Entrega (.zip)
+
+Compacte **sem** `node_modules/` e `dist/`, incluindo: `src/`, `public/`, `index.html`,
+`package.json`, `package-lock.json`, `vite.config.ts`, `tsconfig*.json`, `eslint.config.js`,
+`vercel.json`, `.env.example` e `README.md`. Para conferir: descompacte em outra pasta e rode
+`npm install && npm run dev`.
+
+```powershell
+# PowerShell, na pasta Challenge-FrontEnd
+git archive --format=zip -o ..\Challenge-FrontEnd.zip HEAD
 ```
 
-`check` executa Prettier, ESLint, TypeScript em modo estrito e build de produção.
-Use `npm run format` para aplicar a formatação padronizada.
-`preview` serve a última versão compilada; para desenvolvimento, use `dev`.
+---
 
-### Componentes e rotas
+## 🔀 Rotas e integração com a API
 
-- `Header`, `Navbar` e `Footer`: estrutura compartilhada, menu responsivo e link para pular ao conteúdo.
-- `Button`: botões de ação e links internos com aparência consistente.
-- `Card`: painéis com espaçamento responsivo.
-- `FormField` e `Modal`: campos com erros acessíveis e diálogo com foco e fechamento por Escape.
-- `Layout`: títulos das páginas, foco no conteúdo e retorno ao topo nas trocas de rota.
-- Rotas: `/`, `/sobre`, `/quem-somos`, `/quem-somos/:id`, `/faq`, `/contato`, `/conversao` e fallback 404.
+| Rota                                    | Acesso   | Descrição                                                  |
+| --------------------------------------- | -------- | ---------------------------------------------------------- |
+| `/`                                     | público  | Home                                                       |
+| `/sobre`, `/faq`, `/contato`            | público  | Páginas institucionais                                     |
+| `/integrantes`, `/integrantes/:id`      | público  | Equipe e perfil de cada integrante (rota dinâmica)         |
+| `/conversao`                            | público* | Simulador; logado, registra minutos na API                 |
+| `/cadastro`, `/login`, `/esqueci-senha` | público  | Conta do usuário                                           |
+| `/painel`                               | logado   | Pontos, tickets, CO₂ e selo do usuário                     |
+| `/usuarios`, `/usuarios/novo`           | logado   | Lista (busca) e cadastro de usuários                       |
+| `/usuarios/:id`, `/usuarios/:id/editar` | logado   | Detalhe, edição e exclusão com confirmação                 |
+| `/viagens`, `/viagens/nova`             | logado   | Viagens de ônibus e CO₂ economizado                        |
+| `/viagens/:id`, `/viagens/:id/editar`   | logado   | Detalhe (com o cálculo), edição e exclusão com confirmação |
+| `*`                                     | público  | Página 404                                                 |
 
-Em hospedagem estática, configure o servidor de forma para servir `index.html` nas rotas da aplicação.
-O formulário ainda é uma demonstração local no qual valida dados e mostra um modal, mas não envia e-mails nem faz chamadas a um backend
+Toda requisição passa por `src/services/api.ts` (`fetch` nativo, base `VITE_API_URL`):
 
-### Colaboração e versionamento
+| Serviço          | Endpoints da API                                                                                                                                            |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authService`    | `POST /api/auth/login`, `POST /api/usuarios`, `POST /api/auth/recuperar-senha`                                                                              |
+| `usuarioService` | `GET/POST /api/usuarios`, `GET/PUT/DELETE /api/usuarios/{id}`, `GET /api/usuarios/{id}/pontos · /tickets · /co2 · /selo`, `POST /api/usuarios/{id}/minutos` |
+| `co2Service`     | `GET/POST /api/co2`, `GET/PUT/DELETE /api/co2/{id}`                                                                                                         |
 
-Consulte [CONTRIBUTING.md](CONTRIBUTING.md) para o fluxo de branches e revisão.
-Cada push na `main` e cada pull request executa a validação em GitHub Actions.
-Isso não configura proteção de branch nem publica o site automaticamente.
+Tratamento de respostas: **400/409** mostram a mensagem de validação da API, **404** mostra
+"não encontrado", **500**/falha de rede mostram erro genérico com "Tentar novamente". Toda tela
+que consome a API tem estado de **carregando**, **erro** e **lista vazia**; se a API (plano
+gratuito) demorar a acordar, a tela avisa o usuário.
 
 ---
 
-## 👥 Equipe
+## 📬 Contato
 
-| Nome                                                        | Função                          | RM     |
-| ----------------------------------------------------------- | ------------------------------- | ------ |
-| [Henrique Soares Soares](https://github.com/henriquesoaresserra-h) | Desenvolvedor de DataBase       | 573618 |
-| [Vinicius Soares](https://github.com/vinisl2510-sudo)       | Desenvolvedor Front-End         | 573351 |
-| [Nicolas Frazão](https://github.com/Frazaomol)              | Desenvolvedor de Agente Virtual | 568780 |
-| [Cauã Bertini](https://github.com/cauabertini)              | Desenvolvedor Python            | 570451 |
+- Equipe TrustCorp — turma 1TDSPI, FIAP (Av. Paulista, 1106 — São Paulo/SP)
+- Abra uma [issue](https://github.com/Challenge-Trust/Challenge-FrontEnd/issues) ou fale com
+  qualquer integrante pelos links da seção [Autores e créditos](#-autores-e-créditos).
+- Formulário de contato no site: `/contato`
 
 ---
 
-## 📌 Status do Projeto
-
-🚧 **Em desenvolvimento** — Projeto acadêmico FIAP (2026)
-
-- [x] Site institucional   (Front-End)
-- [ ] Back-End Java
-- [ ] Back-End Python
-- [ ] Integração com Banco de Dados
-- [ ] APP Mobile
-- [ ] Assistente Virtual com IA
-
----
-
-## 📄 Licença
-
-Projeto acadêmico desenvolvido para a **FIAP**(2026). Todos os direitos reservados ao grupo TrustCorp.
-
+Projeto acadêmico desenvolvido para a **FIAP** (2026). Todos os direitos reservados ao grupo
+TrustCorp.
