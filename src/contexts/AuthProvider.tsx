@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState, type PropsWithChildren } from 'react';
 import { lerSessao, salvarSessao } from '../services/api';
 import { authService } from '../services/authService';
-import type { LoginRequest, SessaoUsuario } from '../types';
+import type { LoginRequest, SessaoUsuario, Usuario } from '../types';
 import { AuthContext } from './authContext';
 
 export function AuthProvider({ children }: PropsWithChildren) {
@@ -18,9 +18,18 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setSessao(null);
   }, []);
 
+  const atualizarSessao = useCallback((usuario: Usuario) => {
+    setSessao((atual) => {
+      if (!atual || atual.id !== usuario.id) return atual;
+      const nova = { ...atual, ...usuario };
+      salvarSessao(nova);
+      return nova;
+    });
+  }, []);
+
   const value = useMemo(
-    () => ({ sessao, autenticado: sessao !== null, login, logout }),
-    [sessao, login, logout],
+    () => ({ sessao, autenticado: sessao !== null, login, logout, atualizarSessao }),
+    [sessao, login, logout, atualizarSessao],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
