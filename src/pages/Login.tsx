@@ -28,7 +28,7 @@ export default function Login() {
     formState: { errors, isSubmitting },
   } = useForm<LoginForm>({ defaultValues: { cpf: '', password: '' } });
 
-  if (autenticado) return <Navigate to="/painel" replace />;
+  if (autenticado) return <Navigate to={state.from ?? '/painel'} replace />;
 
   const onSubmit = async (data: LoginForm) => {
     setErro(null);
