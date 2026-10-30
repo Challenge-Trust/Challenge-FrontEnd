@@ -3,6 +3,7 @@ export interface TeamMember {
   name: string;
   role: string;
   rm: string;
+  turma: string;
   photo: string;
   logo: string;
   logoAlt: string;

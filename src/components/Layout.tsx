@@ -25,8 +25,8 @@ export default function Layout() {
       (item) => item.to === pathname,
     );
     const dinamico = dynamicTitles.find(([padrao]) => padrao.test(pathname))?.[1];
-    const member = pathname.startsWith('/quem-somos/')
-      ? team.find((item) => pathname === `/quem-somos/${item.id}`)
+    const member = pathname.startsWith('/integrantes/')
+      ? team.find((item) => pathname === `/integrantes/${item.id}`)
       : undefined;
     document.title = `${page?.label ?? extraTitles[pathname] ?? dinamico ?? member?.name ?? 'Página não encontrada'} · SoulUp`;
     if (previousPath.current !== pathname) {
