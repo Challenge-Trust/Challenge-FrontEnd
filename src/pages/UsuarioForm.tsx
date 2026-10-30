@@ -44,7 +44,7 @@ export default function UsuarioForm() {
         titulo={edicao ? 'Editar usuário' : 'Novo usuário'}
         descricao={
           edicao
-            ? 'Atualize os dados cadastrais. Deixe a senha em branco para mantê-la.'
+            ? 'Atualize os dados cadastrais. Deixe CPF e senha em branco para mantê-los.'
             : 'Os minutos informados já são convertidos em pontos (180 min = 1 ponto) e tickets (10 pontos = 1 ticket).'
         }
       />
@@ -86,7 +86,8 @@ function Formulario({ usuario }: { usuario?: Usuario }) {
     defaultValues: {
       name: usuario?.name ?? '',
       userName: usuario?.userName ?? '',
-      cpf: usuario ? mascararCpf(usuario.cpf) : '',
+      // A API só devolve o CPF mascarado; na edição o campo começa vazio (= manter o atual)
+      cpf: '',
       password: '',
       confirmPassword: '',
       viewMinutes: String(usuario?.viewMinutes ?? 0),
@@ -98,8 +99,8 @@ function Formulario({ usuario }: { usuario?: Usuario }) {
     const payload: UsuarioRequest = {
       name: data.name.trim(),
       userName: data.userName.trim() || null,
-      cpf: apenasDigitos(data.cpf),
       viewMinutes: Number(data.viewMinutes),
+      ...(data.cpf ? { cpf: apenasDigitos(data.cpf) } : {}),
       ...(data.password ? { password: data.password } : {}),
     };
     try {
@@ -157,20 +158,27 @@ function Formulario({ usuario }: { usuario?: Usuario }) {
             />
           </FormField>
 
-          <FormField id="cpf" label="CPF" required error={errors.cpf?.message}>
+          <FormField
+            id="cpf"
+            label={edicao ? 'Novo CPF' : 'CPF'}
+            required={!edicao}
+            error={errors.cpf?.message}
+          >
             <input
               id="cpf"
               type="text"
               inputMode="numeric"
               autoComplete="off"
-              placeholder="000.000.000-00"
-              aria-required="true"
+              placeholder={usuario ? `Atual: ${usuario.cpf}` : '000.000.000-00'}
+              aria-required={!edicao}
               aria-invalid={Boolean(errors.cpf)}
               aria-describedby={errors.cpf ? 'cpf-error' : undefined}
               className={controlClass}
               {...register('cpf', {
-                required: 'Informe o CPF.',
-                validate: (v) => cpfValido(v) || 'CPF inválido.',
+                validate: (v) => {
+                  if (!v) return edicao || 'Informe o CPF.';
+                  return cpfValido(v) || 'CPF inválido.';
+                },
                 onChange: (e) => setValue('cpf', mascararCpf(e.target.value)),
               })}
             />
