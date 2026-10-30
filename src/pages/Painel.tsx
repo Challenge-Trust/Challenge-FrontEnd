@@ -6,6 +6,7 @@ import { useAuth } from '../hooks/useAuth';
 import { ApiError } from '../services/api';
 import { usuarioService } from '../services/usuarioService';
 import type { AsyncState, Co2Economia, Pontos, Selo, Ticket } from '../types';
+import { formatarData, formatarNumero, gramasParaKg } from '../utils/formatacao';
 
 interface DadosPainel {
   tickets: Ticket[];
@@ -13,15 +14,6 @@ interface DadosPainel {
   co2: Co2Economia[];
   selo: Selo;
 }
-
-const formatarData = (iso: string) =>
-  new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-
-const formatarNumero = (n: number) =>
-  n.toLocaleString('pt-BR', { maximumFractionDigits: 2, minimumFractionDigits: 0 });
-
-/** A API calcula o CO₂ economizado em gramas; no painel exibimos em kg. */
-const gramasParaKg = (gramas: number) => gramas / 1000;
 
 /** Usuário sem registro de pontos ainda: a API pode responder 404, tratado como saldo zero. */
 const pontosOuNulo = (promise: Promise<Pontos>) =>
