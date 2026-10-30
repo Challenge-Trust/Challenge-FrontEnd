@@ -85,7 +85,6 @@ Turma **1TDSPI** · FIAP · 2026 · Equipe **TrustCorp**
 
 | Foto                                                                       | Nome            | RM     | Função                          | GitHub                                                            | LinkedIn                                                                        |
 | -------------------------------------------------------------------------- | --------------- | ------ | ------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| <img src="public/img/nicolas.jpeg" width="70" alt="Nicolas Martins">       | Nicolas Martins | 573178 | Desenvolvedor de Software Java  | [NickRM22](https://github.com/NickRM22)                           | [LinkedIn](https://www.linkedin.com/in/nicolas-rodrigues-martins-126607360)     |
 | <img src="public/img/henrique.jpeg" width="70" alt="Henrique Soares">      | Henrique Soares | 573618 | Desenvolvedor de Banco de Dados | [henriquesoaresserra-h](https://github.com/henriquesoaresserra-h) | [LinkedIn](https://www.linkedin.com/in/henrique-s-s-47419a3aa/)                 |
 | <img src="public/img/vinicius.jpeg" width="70" alt="Vinicius Soares">      | Vinicius Soares | 573351 | Desenvolvedor Front-End e Java  | [vinisl2510-sudo](https://github.com/vinisl2510-sudo)             | [LinkedIn](https://www.linkedin.com/in/vin%C3%ADcius-soares-loureiro-9bb96b34b) |
 | <img src="public/img/nicolas_frazao.jpeg" width="70" alt="Nicolas Frazão"> | Nicolas Frazão  | 568780 | Desenvolvedor de Agente Virtual | [Frazaomol](https://github.com/Frazaomol)                         | [LinkedIn](https://www.linkedin.com/in/nicolas-molina-3a9257355)                |
@@ -95,13 +94,13 @@ Turma **1TDSPI** · FIAP · 2026 · Equipe **TrustCorp**
 
 ## 🖼 Imagens e ícones
 
-| Arquivo                                                                                               | Onde aparece                                |
-| ----------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| `src/assets/logo.svg` / `public/favicon.svg`                                                          | Logo da SoulUp no cabeçalho e ícone da aba  |
-| `public/img/*.jpeg`, `public/img/caua.png`                                                            | Fotos dos integrantes (`/integrantes`)      |
-| `public/img/java-logo.png`, `python-logo.png`, `html-logo.png`, `ia-logo.png`, `datamodeler-logo.png` | Área de atuação de cada integrante          |
-| `public/img/github-logo.png`, `linkedin-logo.png`                                                     | Links do perfil de cada integrante          |
-| Emojis (🎥 🎯 🚌 🗂️)                                                                                  | Ícones decorativos (sem biblioteca externa) |
+| Arquivo                                                                              | Onde aparece                                |
+| ------------------------------------------------------------------------------------ | ------------------------------------------- |
+| `src/assets/logo.svg` / `public/favicon.svg`                                         | Logo da SoulUp no cabeçalho e ícone da aba  |
+| `public/img/*.jpeg`, `public/img/caua.png`                                           | Fotos dos integrantes (`/integrantes`)      |
+| `public/img/python-logo.png`, `html-logo.png`, `ia-logo.png`, `datamodeler-logo.png` | Área de atuação de cada integrante          |
+| `public/img/github-logo.png`, `linkedin-logo.png`                                    | Links do perfil de cada integrante          |
+| Emojis (🎥 🎯 🚌 🗂️)                                                                 | Ícones decorativos (sem biblioteca externa) |
 
 ### Telas
 

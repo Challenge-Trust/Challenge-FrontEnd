@@ -2,18 +2,6 @@ import type { TeamMember } from '../types';
 
 export const team: TeamMember[] = [
   {
-    id: 'nicolas-martins',
-    name: 'Nicolas Martins',
-    role: 'Desenvolvedor de Software Java',
-    rm: 'RM 573178',
-    turma: '1TDSPI',
-    photo: '/img/nicolas.jpeg',
-    logo: '/img/java-logo.png',
-    logoAlt: 'Logo Java',
-    linkedin: 'https://www.linkedin.com/in/nicolas-rodrigues-martins-126607360',
-    github: 'https://github.com/NickRM22',
-  },
-  {
     id: 'henrique-soares',
     name: 'Henrique Soares',
     role: 'Desenvolvedor do DataBase',
