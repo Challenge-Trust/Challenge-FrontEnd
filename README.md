@@ -112,8 +112,8 @@ Turma **1TDSPI** · FIAP · 2026 · Equipe **TrustCorp**
 ## ▶️ Como usar
 
 - **Repositório:** <https://github.com/Challenge-Trust/Challenge-FrontEnd>
-- **Aplicação publicada (Vercel):** **[PREENCHER APÓS O DEPLOY]**
-- **API publicada (Render):** **[PREENCHER APÓS O DEPLOY]**
+- **Aplicação publicada (Vercel):** <https://soulup-trustcorp.vercel.app>
+- **API publicada (Render):** <https://soulup-api-6rv6.onrender.com>
 - **Vídeo de apresentação (YouTube):** **[PREENCHER]**
 
 ### Requisitos
