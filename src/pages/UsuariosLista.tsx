@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import ConfirmarExclusaoUsuario from '../components/ConfirmarExclusaoUsuario';
 import EmptyState from '../components/EmptyState';
 import ErrorState from '../components/ErrorState';
 import FlashMessage from '../components/FlashMessage';
 import { controlClass } from '../components/formStyles';
 import LoadingState from '../components/LoadingState';
 import PageHeader from '../components/PageHeader';
+import { useExclusaoUsuario } from '../hooks/useExclusaoUsuario';
 import { useFetch } from '../hooks/useFetch';
 import { usuarioService } from '../services/usuarioService';
 import type { Usuario } from '../types';
@@ -30,6 +32,7 @@ function filtrar(usuarios: Usuario[], busca: string): Usuario[] {
 export default function UsuariosLista() {
   const [busca, setBusca] = useState('');
   const { estado, recarregar } = useFetch('usuarios', (signal) => usuarioService.listar(signal));
+  const { alvo, pedirExclusao, cancelar, confirmar } = useExclusaoUsuario(recarregar);
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-12 sm:px-10 sm:py-16">
@@ -54,7 +57,15 @@ export default function UsuariosLista() {
         </EmptyState>
       )}
       {estado.status === 'success' && estado.data.length > 0 && (
-        <ListaUsuarios usuarios={estado.data} busca={busca} onBuscar={setBusca} />
+        <ListaUsuarios
+          usuarios={estado.data}
+          busca={busca}
+          onBuscar={setBusca}
+          onExcluir={pedirExclusao}
+        />
+      )}
+      {alvo && (
+        <ConfirmarExclusaoUsuario usuario={alvo} onConfirm={confirmar} onCancel={cancelar} />
       )}
     </section>
   );
@@ -64,9 +75,10 @@ interface ListaUsuariosProps {
   usuarios: Usuario[];
   busca: string;
   onBuscar: (valor: string) => void;
+  onExcluir: (usuario: Usuario) => void;
 }
 
-function ListaUsuarios({ usuarios, busca, onBuscar }: ListaUsuariosProps) {
+function ListaUsuarios({ usuarios, busca, onBuscar, onExcluir }: ListaUsuariosProps) {
   const filtrados = filtrar(usuarios, busca);
 
   return (
@@ -127,6 +139,14 @@ function ListaUsuarios({ usuarios, busca, onBuscar }: ListaUsuariosProps) {
                     className="flex-1"
                   >
                     Editar
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => onExcluir(usuario)}
+                    aria-label={`Excluir ${usuario.name}`}
+                    className="flex-1"
+                  >
+                    Excluir
                   </Button>
                 </div>
               </Card>

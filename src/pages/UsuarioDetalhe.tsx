@@ -1,11 +1,13 @@
 import { useParams } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import ConfirmarExclusaoUsuario from '../components/ConfirmarExclusaoUsuario';
 import ErrorState from '../components/ErrorState';
 import FlashMessage from '../components/FlashMessage';
 import LoadingState from '../components/LoadingState';
 import PageHeader from '../components/PageHeader';
 import ResumoUsuario from '../components/ResumoUsuario';
+import { useExclusaoUsuario } from '../hooks/useExclusaoUsuario';
 import { useFetch } from '../hooks/useFetch';
 import { usuarioService } from '../services/usuarioService';
 import type { Usuario } from '../types';
@@ -20,6 +22,7 @@ export default function UsuarioDetalhe() {
   const { estado, recarregar } = useFetch(id === null ? null : `usuario-${id}`, (signal) =>
     usuarioService.buscarResumo(Number(id), signal),
   );
+  const { alvo, pedirExclusao, cancelar, confirmar } = useExclusaoUsuario();
 
   return (
     <section className="mx-auto max-w-5xl px-5 py-12 sm:px-10 sm:py-16">
@@ -48,6 +51,9 @@ export default function UsuarioDetalhe() {
                 acoes={
                   <>
                     <Button to={`/usuarios/${estado.data.usuario.id}/editar`}>Editar</Button>
+                    <Button variant="danger" onClick={() => pedirExclusao(estado.data.usuario)}>
+                      Excluir
+                    </Button>
                     <Button to="/usuarios" variant="secondary">
                       Voltar
                     </Button>
@@ -60,6 +66,9 @@ export default function UsuarioDetalhe() {
             </>
           )}
         </>
+      )}
+      {alvo && (
+        <ConfirmarExclusaoUsuario usuario={alvo} onConfirm={confirmar} onCancel={cancelar} />
       )}
     </section>
   );
