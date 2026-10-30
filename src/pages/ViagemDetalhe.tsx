@@ -6,6 +6,7 @@ import FlashMessage from '../components/FlashMessage';
 import LoadingState from '../components/LoadingState';
 import PageHeader from '../components/PageHeader';
 import { useAuth } from '../hooks/useAuth';
+import { useExclusaoViagem } from '../hooks/useExclusaoViagem';
 import { useFetch } from '../hooks/useFetch';
 import { co2Service } from '../services/co2Service';
 import type { Co2Economia } from '../types';
@@ -48,6 +49,7 @@ export default function ViagemDetalhe() {
 }
 
 function Detalhe({ viagem }: { viagem: Co2Economia }) {
+  const { pedirExclusao, dialogo } = useExclusaoViagem();
   const emissaoPorPassageiro = EMISSAO_ONIBUS_G_KM / viagem.passageiroOnibus;
   const campos = [
     { rotulo: 'Data do cálculo', valor: formatarData(viagem.dataCalculo) },
@@ -67,6 +69,9 @@ function Detalhe({ viagem }: { viagem: Co2Economia }) {
         acoes={
           <>
             <Button to={`/viagens/${viagem.id}/editar`}>Editar</Button>
+            <Button variant="danger" onClick={() => pedirExclusao(viagem)}>
+              Excluir
+            </Button>
             <Button to="/viagens" variant="secondary">
               Voltar
             </Button>
@@ -74,6 +79,7 @@ function Detalhe({ viagem }: { viagem: Co2Economia }) {
         }
       />
       <FlashMessage />
+      {dialogo}
 
       <Card className="mb-6">
         <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">

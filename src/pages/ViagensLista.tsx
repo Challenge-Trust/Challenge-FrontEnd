@@ -6,6 +6,7 @@ import FlashMessage from '../components/FlashMessage';
 import LoadingState from '../components/LoadingState';
 import PageHeader from '../components/PageHeader';
 import { useAuth } from '../hooks/useAuth';
+import { useExclusaoViagem } from '../hooks/useExclusaoViagem';
 import { useFetch } from '../hooks/useFetch';
 import { usuarioService } from '../services/usuarioService';
 import type { Co2Economia } from '../types';
@@ -19,6 +20,7 @@ export default function ViagensLista() {
     usuarioId === undefined ? null : `viagens-${usuarioId}`,
     (signal) => usuarioService.listarCo2(Number(usuarioId), signal),
   );
+  const { pedirExclusao, dialogo } = useExclusaoViagem(recarregar);
 
   return (
     <section className="mx-auto max-w-5xl px-5 py-12 sm:px-10 sm:py-16">
@@ -42,12 +44,20 @@ export default function ViagensLista() {
           <Button to="/viagens/nova">Registrar primeira viagem</Button>
         </EmptyState>
       )}
-      {estado.status === 'success' && estado.data.length > 0 && <Lista viagens={estado.data} />}
+      {estado.status === 'success' && estado.data.length > 0 && (
+        <Lista viagens={estado.data} onExcluir={pedirExclusao} />
+      )}
+      {dialogo}
     </section>
   );
 }
 
-function Lista({ viagens }: { viagens: Co2Economia[] }) {
+interface ListaProps {
+  viagens: Co2Economia[];
+  onExcluir: (viagem: Co2Economia) => void;
+}
+
+function Lista({ viagens, onExcluir }: ListaProps) {
   const totalKg = gramasParaKg(viagens.reduce((soma, v) => soma + v.co2Economizado, 0));
   const totalKm = viagens.reduce((soma, v) => soma + v.distanciaKm, 0);
 
@@ -88,6 +98,14 @@ function Lista({ viagens }: { viagens: Co2Economia[] }) {
                 </Button>
                 <Button to={`/viagens/${viagem.id}/editar`} variant="secondary" className="flex-1">
                   Editar
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={() => onExcluir(viagem)}
+                  aria-label={`Excluir viagem de ${formatarData(viagem.dataCalculo)}`}
+                  className="flex-1"
+                >
+                  Excluir
                 </Button>
               </div>
             </Card>
