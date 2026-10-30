@@ -15,6 +15,7 @@ export const guestNavigation = [
 
 export const userNavigation = [
   { label: 'Meu Painel', to: '/painel' },
+  { label: 'Viagens', to: '/viagens' },
   { label: 'Usuários', to: '/usuarios' },
 ] as const;
 
@@ -26,4 +27,7 @@ export const dynamicTitles: ReadonlyArray<readonly [RegExp, string]> = [
   [/^\/usuarios\/novo$/, 'Novo usuário'],
   [/^\/usuarios\/\d+\/editar$/, 'Editar usuário'],
   [/^\/usuarios\/\d+$/, 'Detalhes do usuário'],
+  [/^\/viagens\/nova$/, 'Nova viagem'],
+  [/^\/viagens\/\d+\/editar$/, 'Editar viagem'],
+  [/^\/viagens\/\d+$/, 'Detalhes da viagem'],
 ];

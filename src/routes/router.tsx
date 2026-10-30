@@ -14,6 +14,7 @@ import Painel from '../pages/Painel';
 import UsuariosLista from '../pages/UsuariosLista';
 import UsuarioDetalhe from '../pages/UsuarioDetalhe';
 import UsuarioForm from '../pages/UsuarioForm';
+import ViagensLista from '../pages/ViagensLista';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
           { path: 'usuarios/novo', element: <UsuarioForm /> },
           { path: 'usuarios/:id', element: <UsuarioDetalhe /> },
           { path: 'usuarios/:id/editar', element: <UsuarioForm /> },
+          { path: 'viagens', element: <ViagensLista /> },
         ],
       },
       { path: '*', element: <NotFound /> },
