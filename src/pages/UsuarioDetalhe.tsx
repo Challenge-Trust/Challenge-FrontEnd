@@ -11,7 +11,6 @@ import { useExclusaoUsuario } from '../hooks/useExclusaoUsuario';
 import { useFetch } from '../hooks/useFetch';
 import { usuarioService } from '../services/usuarioService';
 import type { Usuario } from '../types';
-import { mascararCpf } from '../utils/cpf';
 import { formatarNumero } from '../utils/formatacao';
 import { lerId } from '../utils/params';
 
@@ -78,7 +77,7 @@ function DadosCadastrais({ usuario }: { usuario: Usuario }) {
   const campos = [
     { rotulo: 'Nome', valor: usuario.name },
     { rotulo: 'Nome de usuário', valor: usuario.userName ? `@${usuario.userName}` : '—' },
-    { rotulo: 'CPF', valor: mascararCpf(usuario.cpf) },
+    { rotulo: 'CPF', valor: usuario.cpf },
     {
       rotulo: 'Minutos para o próximo ponto',
       valor: `${formatarNumero(usuario.viewMinutes)} de 180`,

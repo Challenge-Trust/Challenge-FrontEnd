@@ -33,6 +33,7 @@ export interface Usuario {
   id: number;
   name: string;
   userName?: string | null;
+  /** Sempre mascarado pela API (ex.: ***.982.247-**); o CPF completo nunca sai do back-end. */
   cpf: string;
   viewMinutes: number;
 }
@@ -55,9 +56,11 @@ export interface CadastroRequest {
   viewMinutes: number;
 }
 
-/** Intersection type: PUT /api/usuarios/{id} aceita os dados do cadastro + userName, com senha opcional. */
-export type UsuarioRequest = Omit<CadastroRequest, 'password'> & {
+/** Intersection type: PUT /api/usuarios/{id} aceita os dados do cadastro + userName; CPF e senha opcionais. */
+export type UsuarioRequest = Omit<CadastroRequest, 'password' | 'cpf'> & {
   userName?: string | null;
+  /** Opcional no PUT: vazio mantém o CPF atual. */
+  cpf?: string;
   password?: string;
 };
 
