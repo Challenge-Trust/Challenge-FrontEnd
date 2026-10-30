@@ -148,3 +148,13 @@ export interface ConversaoResponse {
   viewMinutes: number;
   earnedPoints: number;
 }
+
+/** Tudo o que a tela mostra sobre um usuário (montado a partir de 5 GETs da API). */
+export interface ResumoUsuario {
+  usuario: Usuario;
+  /** null quando o usuário ainda não tem registro de pontos (API responde 404). */
+  pontos: Pontos | null;
+  tickets: Ticket[];
+  co2: Co2Economia[];
+  selo: Selo;
+}

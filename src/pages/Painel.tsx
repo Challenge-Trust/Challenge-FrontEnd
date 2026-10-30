@@ -1,176 +1,49 @@
-import { useEffect, useState } from 'react';
-import Alert from '../components/Alert';
 import Button from '../components/Button';
-import Card from '../components/Card';
+import ErrorState from '../components/ErrorState';
+import FlashMessage from '../components/FlashMessage';
+import LoadingState from '../components/LoadingState';
+import PageHeader from '../components/PageHeader';
+import ResumoUsuario from '../components/ResumoUsuario';
 import { useAuth } from '../hooks/useAuth';
-import { ApiError } from '../services/api';
+import { useFetch } from '../hooks/useFetch';
 import { usuarioService } from '../services/usuarioService';
-import type { AsyncState, Co2Economia, Pontos, Selo, Ticket } from '../types';
-import { formatarData, formatarNumero, gramasParaKg } from '../utils/formatacao';
-
-interface DadosPainel {
-  tickets: Ticket[];
-  pontos: Pontos | null;
-  co2: Co2Economia[];
-  selo: Selo;
-}
-
-/** Usuário sem registro de pontos ainda: a API pode responder 404, tratado como saldo zero. */
-const pontosOuNulo = (promise: Promise<Pontos>) =>
-  promise.catch((error: unknown) => {
-    if (error instanceof ApiError && error.status === 404) return null;
-    throw error;
-  });
+import { formatarNumero } from '../utils/formatacao';
 
 export default function Painel() {
   const { sessao, logout } = useAuth();
   const usuarioId = sessao?.id;
-  const [estado, setEstado] = useState<AsyncState<DadosPainel>>({ status: 'loading' });
-  const [tentativa, setTentativa] = useState(0);
-
-  useEffect(() => {
-    if (usuarioId === undefined) return;
-    const controller = new AbortController();
-    const { signal } = controller;
-
-    Promise.all([
-      usuarioService.listarTickets(usuarioId, signal),
-      pontosOuNulo(usuarioService.buscarPontos(usuarioId, signal)),
-      usuarioService.listarCo2(usuarioId, signal),
-      usuarioService.buscarSelo(usuarioId, signal),
-    ])
-      .then(([tickets, pontos, co2, selo]) =>
-        setEstado({ status: 'success', data: { tickets, pontos, co2, selo } }),
-      )
-      .catch((error: unknown) => {
-        if (error instanceof DOMException && error.name === 'AbortError') return;
-        if (error instanceof ApiError && error.status === 401) {
-          logout();
-          return;
-        }
-        setEstado({
-          status: 'error',
-          message: error instanceof ApiError ? error.message : 'Erro ao carregar seus dados.',
-        });
-      });
-
-    return () => controller.abort();
-  }, [usuarioId, tentativa, logout]);
-
-  const recarregar = () => {
-    setEstado({ status: 'loading' });
-    setTentativa((n) => n + 1);
-  };
+  const { estado, recarregar } = useFetch(
+    usuarioId === undefined ? null : `painel-${usuarioId}`,
+    (signal) => usuarioService.buscarResumo(Number(usuarioId), signal),
+  );
 
   if (!sessao) return null;
 
+  const minutos =
+    estado.status === 'success' ? estado.data.usuario.viewMinutes : sessao.viewMinutes;
+
   return (
     <section className="mx-auto max-w-5xl px-5 py-12 sm:px-10 sm:py-16">
-      <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div className="min-w-0">
-          <span className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Meu painel
-          </span>
-          <h1 className="mt-3 break-words text-3xl font-bold text-heading">
-            Olá, {sessao.name.split(' ')[0]}!
-          </h1>
-          <p className="mt-2 text-sm text-muted">
-            {formatarNumero(sessao.viewMinutes)} minutos acumulados para o próximo ponto (cada 180
-            minutos assistidos = 1 ponto)
-          </p>
-        </div>
-        <Button variant="secondary" onClick={logout} className="w-full sm:w-auto">
-          Sair
-        </Button>
-      </div>
+      <PageHeader
+        eyebrow="Meu painel"
+        titulo={`Olá, ${sessao.name.split(' ')[0]}!`}
+        descricao={`${formatarNumero(minutos)} minutos acumulados para o próximo ponto (cada 180 minutos assistidos = 1 ponto).`}
+        acoes={
+          <>
+            <Button to="/conversao">Registrar minutos</Button>
+            <Button variant="secondary" onClick={logout}>
+              Sair
+            </Button>
+          </>
+        }
+      />
+      <FlashMessage />
 
-      {estado.status === 'loading' && (
-        <p role="status" aria-live="polite" className="py-16 text-center text-muted">
-          Carregando seus dados…
-        </p>
-      )}
-
+      {estado.status === 'loading' && <LoadingState mensagem="Carregando seus dados…" />}
       {estado.status === 'error' && (
-        <div>
-          <Alert tone="error">{estado.message}</Alert>
-          <Button onClick={recarregar}>Tentar novamente</Button>
-        </div>
+        <ErrorState mensagem={estado.message} httpStatus={estado.httpStatus} onRetry={recarregar} />
       )}
-
-      {estado.status === 'success' && <Resumo dados={estado.data} />}
+      {estado.status === 'success' && <ResumoUsuario dados={estado.data} />}
     </section>
-  );
-}
-
-function Resumo({ dados }: { dados: DadosPainel }) {
-  const totalTickets = dados.tickets.reduce((soma, t) => soma + t.tickets, 0);
-  const totalCo2 = gramasParaKg(dados.co2.reduce((soma, c) => soma + c.co2Economizado, 0));
-  const saldoPontos = dados.pontos?.earnedPoints ?? 0;
-
-  const indicadores = [
-    { rotulo: 'Pontos', valor: formatarNumero(saldoPontos), unidade: 'pts' },
-    { rotulo: 'Tickets', valor: formatarNumero(totalTickets), unidade: 'tickets' },
-    { rotulo: 'CO₂ economizado', valor: formatarNumero(totalCo2), unidade: 'kg' },
-
-    { rotulo: 'Selo sustentável', valor: dados.selo.selo, unidade: '' },
-  ];
-
-  return (
-    <>
-      <dl className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {indicadores.map((item) => (
-          <Card key={item.rotulo} padding="compact">
-            <dt className="text-xs uppercase tracking-wide text-faint">{item.rotulo}</dt>
-            <dd className="mt-2 text-3xl font-bold text-accent">
-              {item.valor} <span className="text-sm font-normal text-muted">{item.unidade}</span>
-            </dd>
-          </Card>
-        ))}
-      </dl>
-
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <Card>
-          <h2 className="mb-4 text-lg font-semibold text-heading">Meus tickets</h2>
-          {dados.tickets.length === 0 ? (
-            <p className="text-sm text-muted">
-              Você ainda não emitiu tickets. A cada 10 pontos você ganha 1 ticket.
-            </p>
-          ) : (
-            <ul className="divide-y divide-cardborderalt">
-              {dados.tickets.map((t) => (
-                <li key={t.id} className="flex items-center justify-between gap-4 py-3 text-sm">
-                  <span className="text-body">
-                    {t.tickets} {t.tickets === 1 ? 'ticket' : 'tickets'}
-                  </span>
-                  <span className="text-faint">{formatarData(t.dataEmissao)}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
-
-        <Card>
-          <h2 className="mb-4 text-lg font-semibold text-heading">CO₂ economizado</h2>
-          {dados.co2.length === 0 ? (
-            <p className="text-sm text-muted">Nenhum cálculo de CO₂ registrado até agora.</p>
-          ) : (
-            <ul className="divide-y divide-cardborderalt">
-              {dados.co2.map((c) => (
-                <li key={c.id} className="flex items-center justify-between gap-4 py-3 text-sm">
-                  <span className="min-w-0 text-body">
-                    {formatarNumero(gramasParaKg(c.co2Economizado))} kg
-                    <span className="block text-xs text-faint">
-                      {formatarNumero(c.distanciaKm)} km · {c.passageiroOnibus}{' '}
-                      {c.passageiroOnibus === 1 ? 'passageiro' : 'passageiros'}
-                    </span>
-                  </span>
-                  <span className="shrink-0 text-faint">{formatarData(c.dataCalculo)}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
-      </div>
-    </>
   );
 }
