@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SoulUp">
+  <rect width="64" height="64" rx="16" fill="#4263dc"/>
+  <path d="M25 19.5v25a2 2 0 0 0 3 1.7l20-12.5a2 2 0 0 0 0-3.4l-20-12.5a2 2 0 0 0-3 1.7z" fill="#f0f5ff"/>
+  <path d="M14 50c0-8 6-13 14-13-1 8-6 13-14 13z" fill="#97b6ff"/>
+</svg>
