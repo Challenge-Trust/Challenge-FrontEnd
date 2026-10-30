@@ -64,11 +64,7 @@ export default function ConfirmDialog({
         <Button variant="secondary" onClick={onCancel} disabled={enviando}>
           Cancelar
         </Button>
-        <Button
-          onClick={confirmar}
-          disabled={enviando}
-          className="bg-red-600 bg-none shadow-none hover:bg-red-700"
-        >
+        <Button variant="danger" onClick={confirmar} disabled={enviando}>
           {enviando ? 'Excluindo…' : rotuloConfirmar}
         </Button>
       </div>
