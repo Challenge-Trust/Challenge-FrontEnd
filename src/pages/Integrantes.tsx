@@ -32,7 +32,9 @@ export default function Integrantes() {
                 height={40}
                 className="mb-3 h-10 w-10 object-contain"
               />
-              <span className="text-xs text-muted">{member.rm}</span>
+              <span className="text-xs text-muted">
+                {member.rm} · Turma {member.turma}
+              </span>
               <span className="mt-4 text-sm text-accent">Ver perfil →</span>
             </Card>
           </Link>

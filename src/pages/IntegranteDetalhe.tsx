@@ -38,7 +38,9 @@ export default function IntegranteDetalhe() {
 
         <img src={member.logo} alt={member.logoAlt} className="mb-4 h-14 w-14 object-contain" />
 
-        <span className="mb-6 text-xs text-faint">{member.rm}</span>
+        <span className="mb-6 text-xs text-faint">
+          {member.rm} · Turma {member.turma} · FIAP 2026
+        </span>
 
         <div className="flex flex-wrap justify-center gap-3">
           <a
