@@ -3,7 +3,7 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import { team } from '../data/team';
 
-export default function QuemSomosDetalhe() {
+export default function IntegranteDetalhe() {
   const { id } = useParams<{ id: string }>();
 
   const member = team.find((item) => item.id === id);
@@ -13,14 +13,14 @@ export default function QuemSomosDetalhe() {
       <section className="mx-auto max-w-2xl px-6 py-24 text-center sm:px-10">
         <h1 className="mb-4 text-2xl font-bold text-heading">Integrante não encontrado</h1>
         <p className="mb-8 text-faint">Não encontramos ninguém com esse identificador na equipe.</p>
-        <Button to="/quem-somos">← Voltar para Quem Somos</Button>
+        <Button to="/integrantes">← Voltar para Integrantes</Button>
       </section>
     );
   }
 
   return (
     <section className="mx-auto max-w-2xl px-6 py-16 sm:px-10">
-      <Button to="/quem-somos" variant="secondary" className="mb-8">
+      <Button to="/integrantes" variant="secondary" className="mb-8">
         ← Voltar
       </Button>
 

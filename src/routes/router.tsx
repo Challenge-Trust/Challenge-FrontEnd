@@ -1,9 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Home from '../pages/Home';
 import Sobre from '../pages/Sobre';
-import QuemSomos from '../pages/QuemSomos';
-import QuemSomosDetalhe from '../pages/QuemSomosDetalhe';
+import Integrantes from '../pages/Integrantes';
+import IntegranteDetalhe from '../pages/IntegranteDetalhe';
+import RedirecionarComId from '../components/RedirecionarComId';
 import Faq from '../pages/Faq';
 import Contato from '../pages/Contato';
 import Conversao from '../pages/Conversao';
@@ -27,8 +28,10 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'sobre', element: <Sobre /> },
-      { path: 'quem-somos', element: <QuemSomos /> },
-      { path: 'quem-somos/:id', element: <QuemSomosDetalhe /> },
+      { path: 'integrantes', element: <Integrantes /> },
+      { path: 'integrantes/:id', element: <IntegranteDetalhe /> },
+      { path: 'quem-somos', element: <Navigate to="/integrantes" replace /> },
+      { path: 'quem-somos/:id', element: <RedirecionarComId para="/integrantes" /> },
       { path: 'faq', element: <Faq /> },
       { path: 'contato', element: <Contato /> },
       { path: 'conversao', element: <Conversao /> },
