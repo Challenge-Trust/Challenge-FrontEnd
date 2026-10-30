@@ -15,6 +15,7 @@ import UsuariosLista from '../pages/UsuariosLista';
 import UsuarioDetalhe from '../pages/UsuarioDetalhe';
 import UsuarioForm from '../pages/UsuarioForm';
 import ViagensLista from '../pages/ViagensLista';
+import ViagemForm from '../pages/ViagemForm';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -42,6 +43,8 @@ export const router = createBrowserRouter([
           { path: 'usuarios/:id', element: <UsuarioDetalhe /> },
           { path: 'usuarios/:id/editar', element: <UsuarioForm /> },
           { path: 'viagens', element: <ViagensLista /> },
+          { path: 'viagens/nova', element: <ViagemForm /> },
+          { path: 'viagens/:id/editar', element: <ViagemForm /> },
         ],
       },
       { path: '*', element: <NotFound /> },
