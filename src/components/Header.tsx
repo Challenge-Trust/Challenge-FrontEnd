@@ -17,7 +17,9 @@ export default function Header() {
           className="inline-flex min-h-11 items-center gap-3 text-2xl font-bold text-white"
         >
           <img src={logo} alt="" width={36} height={36} className="h-9 w-9" />
-          Trust<span className="text-accent">Corp.</span>
+          <span>
+            Trust<span className="text-accent">Corp.</span>
+          </span>
         </Link>
         <Navbar />
       </div>
