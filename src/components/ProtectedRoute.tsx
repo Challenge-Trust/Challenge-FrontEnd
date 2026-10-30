@@ -10,7 +10,7 @@ export default function ProtectedRoute() {
   if (!autenticado) {
     const state: LocationState = {
       from: location.pathname,
-      aviso: 'Faça login para acessar o seu painel.',
+      aviso: 'Faça login para acessar esta página.',
     };
     return <Navigate to="/login" replace state={state} />;
   }
