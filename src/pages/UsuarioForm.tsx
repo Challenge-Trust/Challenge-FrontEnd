@@ -169,9 +169,7 @@ function Formulario({ usuario }: { usuario?: Usuario }) {
               type="text"
               inputMode="numeric"
               autoComplete="off"
-              placeholder={
-                usuario ? `Atual: ${usuario.cpf} (em branco = manter)` : '000.000.000-00'
-              }
+              placeholder={usuario ? `Atual: ${usuario.cpf}` : '000.000.000-00'}
               aria-required={!edicao}
               aria-invalid={Boolean(errors.cpf)}
               aria-describedby={errors.cpf ? 'cpf-error' : undefined}
