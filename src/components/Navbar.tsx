@@ -17,7 +17,7 @@ export default function Navbar() {
   return (
     <nav
       aria-label="Navegação principal"
-      className="contents lg:block"
+      className="contents xl:block"
       onKeyDown={(event) => {
         if (event.key === 'Escape' && open) {
           setOpen(false);
@@ -32,14 +32,14 @@ export default function Navbar() {
         aria-controls="menu-principal"
         aria-label={open ? 'Fechar menu' : 'Abrir menu'}
         onClick={() => setOpen((value) => !value)}
-        className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-cardborder bg-card px-4 text-sm text-heading lg:hidden"
+        className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-cardborder bg-card px-4 text-sm text-heading xl:hidden"
       >
         <span aria-hidden="true">{open ? '✕' : '☰'}</span>
         Menu
       </button>
       <ul
         id="menu-principal"
-        className={`${open ? 'flex' : 'hidden'} w-full flex-col gap-2 border-t border-cardborderalt pt-4 lg:flex lg:w-auto lg:flex-row lg:border-0 lg:pt-0`}
+        className={`${open ? 'flex' : 'hidden'} w-full flex-col gap-2 border-t border-cardborderalt pt-4 xl:flex xl:w-auto xl:flex-row xl:border-0 xl:pt-0`}
       >
         {links.map((item) => (
           <li key={item.to}>
