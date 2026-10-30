@@ -13,6 +13,7 @@ import EsqueciSenha from '../pages/EsqueciSenha';
 import Painel from '../pages/Painel';
 import UsuariosLista from '../pages/UsuariosLista';
 import UsuarioDetalhe from '../pages/UsuarioDetalhe';
+import UsuarioForm from '../pages/UsuarioForm';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from '../components/ProtectedRoute';
 
@@ -36,7 +37,9 @@ export const router = createBrowserRouter([
         children: [
           { path: 'painel', element: <Painel /> },
           { path: 'usuarios', element: <UsuariosLista /> },
+          { path: 'usuarios/novo', element: <UsuarioForm /> },
           { path: 'usuarios/:id', element: <UsuarioDetalhe /> },
+          { path: 'usuarios/:id/editar', element: <UsuarioForm /> },
         ],
       },
       { path: '*', element: <NotFound /> },
