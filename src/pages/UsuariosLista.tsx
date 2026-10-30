@@ -13,7 +13,7 @@ import { useExclusaoUsuario } from '../hooks/useExclusaoUsuario';
 import { useFetch } from '../hooks/useFetch';
 import { usuarioService } from '../services/usuarioService';
 import type { Usuario } from '../types';
-import { apenasDigitos, mascararCpf } from '../utils/cpf';
+import { apenasDigitos } from '../utils/cpf';
 import { formatarNumero } from '../utils/formatacao';
 
 /** Filtra por nome, nome de usuário ou CPF (com ou sem máscara). */
@@ -25,7 +25,7 @@ function filtrar(usuarios: Usuario[], busca: string): Usuario[] {
     (u) =>
       u.name.toLowerCase().includes(termo) ||
       (u.userName ?? '').toLowerCase().includes(termo) ||
-      (digitos.length > 0 && u.cpf.includes(digitos)),
+      (digitos.length > 0 && apenasDigitos(u.cpf).includes(digitos)),
   );
 }
 
@@ -122,7 +122,7 @@ function ListaUsuarios({ usuarios, busca, onBuscar, onExcluir }: ListaUsuariosPr
                 <dl className="grid grid-cols-2 gap-2 text-sm">
                   <div>
                     <dt className="text-xs uppercase tracking-wide text-faint">CPF</dt>
-                    <dd className="text-body">{mascararCpf(usuario.cpf)}</dd>
+                    <dd className="text-body">{usuario.cpf}</dd>
                   </div>
                   <div>
                     <dt className="text-xs uppercase tracking-wide text-faint">Minutos</dt>
