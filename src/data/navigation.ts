@@ -13,7 +13,17 @@ export const guestNavigation = [
   { label: 'Criar conta', to: '/cadastro' },
 ] as const;
 
-export const userNavigation = [{ label: 'Meu Painel', to: '/painel' }] as const;
+export const userNavigation = [
+  { label: 'Meu Painel', to: '/painel' },
+  { label: 'Usuários', to: '/usuarios' },
+] as const;
 
 /** Rotas sem item de menu, usadas apenas para o título da aba. */
 export const extraTitles: Record<string, string> = { '/esqueci-senha': 'Esqueci minha senha' };
+
+/** Títulos das rotas com parâmetro (avaliadas na ordem). */
+export const dynamicTitles: ReadonlyArray<readonly [RegExp, string]> = [
+  [/^\/usuarios\/novo$/, 'Novo usuário'],
+  [/^\/usuarios\/\d+\/editar$/, 'Editar usuário'],
+  [/^\/usuarios\/\d+$/, 'Detalhes do usuário'],
+];
