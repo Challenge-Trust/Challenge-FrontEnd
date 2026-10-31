@@ -26,9 +26,11 @@ export function useFetch<T>(
 
     carregarRef
       .current(controller.signal)
-      .then((data) => setEstado({ status: 'success', data }))
+      .then((data) => {
+        if (!controller.signal.aborted) setEstado({ status: 'success', data });
+      })
       .catch((error: unknown) => {
-        if (error instanceof DOMException && error.name === 'AbortError') return;
+        if (controller.signal.aborted) return;
         setEstado(
           error instanceof ApiError
             ? { status: 'error', message: error.message, httpStatus: error.status }
